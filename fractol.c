@@ -117,25 +117,25 @@ void draw_image(t_mlx *mlx, t_scene *scene, t_img_data *image)
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, image->img_ptr, 0, 0);
 }
 
-int	kill(t_mlx mlx)
+int	kill(t_mlx *mlx)
 {
-	mlx_destroy_window(mlx.mlx_ptr, mlx.mlx_window);
+	mlx_destroy_window(mlx->mlx_ptr, mlx->mlx_window);
 	printf("Yo\n");
-	exit (0);
+	exit (1);
 }
 
 int	keypress(t_key key_code, t_mlx *mlx)
 {
-//		if (key_code == A)
-//			mlx->cross_x-= mlx->speed;
-//		else if (key_code == D)
-//			mlx->cross_y+= mlx->speed;
-//		else if (key_code == S)
-//			mlx->cross_x+= mlx->speed;
-//		else if (key_code == W)
-//			mlx->cross_y-= mlx->speed;
+		if (key_code == A)
+			printf("A\n");
+		else if (key_code == D)
+			printf("D\n");
+		else if (key_code == S)
+			printf("S\n");
+		else if (key_code == W)
+			printf("W\n");
 	if (key_code == ESC)
-		kill(*mlx);
+		kill(mlx);
 	return (0);
 }
 
@@ -154,7 +154,7 @@ int	main(int argc, char **argv)
 	draw_image(&mlx, &scene, &image);
 	printf("\n %s\n", argv[0]);
 	mlx_hook(mlx.mlx_window, KeyRelease, KeyReleaseMask, keypress, &mlx);
-	mlx_key_hook(mlx.mlx_window, keypress, &mlx);
+//	mlx_key_hook(mlx.mlx_window, keypress, &mlx);
 	mlx_hook(mlx.mlx_window, DestroyNotify, StructureNotifyMask, kill, &mlx);
 	mlx_loop(mlx.mlx_ptr);
 	return (0);
