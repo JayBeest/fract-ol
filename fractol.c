@@ -15,7 +15,7 @@ void	init_default_scene(t_scene *scene)
 	scene->res.y = DEFAULT_RES_Y;
 	scene->current_fractal = MANDELBROT;
 	scene->zoom = DEFAULT_ZOOM;
-	scene->offset.x = 0;
+	scene->offset.x = -100;
 	scene->offset.y = 0;
 }
 
@@ -112,8 +112,6 @@ void draw_image(t_mlx *mlx, t_scene *scene, t_img_data *image)
 		}
 		position.y++;
 	}
-	position.x = 50;
-	position.y = 50;
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, image->img_ptr, 0, 0);
 }
 
