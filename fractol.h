@@ -6,6 +6,8 @@
 # define DEFAULT_RES_X 1024
 # define DEFAULT_RES_Y 768
 # define DEFAULT_ZOOM 4
+# define STEP 15
+# define ZOOM_STEP 1
 
 
 typedef enum
@@ -61,12 +63,6 @@ typedef struct
 
 typedef struct
 {
-	void	*mlx_ptr;
-	void	*mlx_window;
-}		t_mlx;
-
-typedef struct
-{
 	void	*img_ptr;
 	char	*img_address;
 	int 	bits_per_pixel;
@@ -81,6 +77,14 @@ typedef struct
 	t_position 		offset;
 	double 			zoom;
 }		t_scene;
+
+typedef struct
+{
+	void		*mlx_ptr;
+	void		*mlx_window;
+	t_scene		scene;
+	t_img_data	image;
+}		t_mlx;
 
 void	init_default_scene(t_scene *scene);
 void	init_scene(t_scene *scene);

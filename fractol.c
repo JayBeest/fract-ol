@@ -95,24 +95,25 @@ unsigned int calculate_fractal(t_scene *scene, t_position pos)
 	return (fetch_colour(n));
 }
 
-void draw_image(t_mlx *mlx, t_scene *scene, t_img_data *image)
+int draw_image(t_mlx *mlx)
 {
 	t_position		position;
 	unsigned int	colour;
 
 	position.y = 0;
-	while (position.y < scene->res.y)
+	while (position.y < mlx->scene.res.y)
 	{
 		position.x = 0;
-		while (position.x < scene->res.x)
+		while (position.x < mlx->scene.res.x)
 		{
-			colour = calculate_fractal(scene, position);
-			put_pixel(image, position, colour);
+			colour = calculate_fractal(&mlx->scene, position);
+			put_pixel(&mlx->image, position, colour);
 			position.x++;
 		}
 		position.y++;
 	}
-	mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, image->img_ptr, 0, 0);
+	mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, mlx->image.img_ptr, 0, 0);
+	return (1);
 }
 
 int	kill(t_mlx *mlx)
@@ -122,38 +123,51 @@ int	kill(t_mlx *mlx)
 	exit (1);
 }
 
+int mouse(int button, int x, int y, t_mlx *mlx)
+{
+	if (button == 4)
+		mlx->scene.zoom = mlx->scene.zoom * ZOOM_STEP;
+	else if (button == 5)
+		mlx->scene.zoom = mlx->scene.zoom / ZOOM_STEP;
+	x = 0;
+	y = 0;
+//	draw_image(mlx);
+	return (1);
+}
+
 int	keypress(t_key key_code, t_mlx *mlx)
 {
 		if (key_code == A)
-			printf("A\n");
+			mlx->scene.offset.x -= STEP;
 		else if (key_code == D)
-			printf("D\n");
+			mlx->scene.offset.x += STEP;
 		else if (key_code == S)
-			printf("S\n");
+			mlx->scene.offset.y += STEP;
 		else if (key_code == W)
-			printf("W\n");
+			mlx->scene.offset.y -= STEP;
 	if (key_code == ESC)
 		kill(mlx);
-	return (0);
+//	draw_image(mlx);
+	return (1);
 }
 
 int	main(int argc, char **argv)
 {
 	t_mlx			mlx;
-	t_scene			scene;
-	t_img_data		image;
 
 	if (argc == 1)
-		init_default_scene(&scene);
+		init_default_scene(&mlx.scene);
 //	else
 		//init_scene();
-	init_mlx(&mlx, &scene);
-	init_mlx_image(&mlx, &scene, &image);
-	draw_image(&mlx, &scene, &image);
+	init_mlx(&mlx, &mlx.scene);
+	init_mlx_image(&mlx, &mlx.scene, &mlx.image);
+	draw_image(&mlx);
 	printf("\n %s\n", argv[0]);
 	mlx_hook(mlx.mlx_window, KeyRelease, KeyReleaseMask, keypress, &mlx);
-//	mlx_key_hook(mlx.mlx_window, keypress, &mlx);
 	mlx_hook(mlx.mlx_window, DestroyNotify, StructureNotifyMask, kill, &mlx);
+	mlx_hook(mlx.mlx_window, ButtonPress, ButtonPressMask, mouse, &mlx);
+
+	mlx_loop_hook(mlx.mlx_ptr,draw_image, &mlx);
 	mlx_loop(mlx.mlx_ptr);
 	return (0);
 }
