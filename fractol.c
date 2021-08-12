@@ -126,9 +126,9 @@ int	kill(t_mlx *mlx)
 int mouse(int button, int x, int y, t_mlx *mlx)
 {
 	if (button == 4)
-		mlx->scene.zoom = mlx->scene.zoom * ZOOM_STEP;
+		mlx->scene.zoom += ZOOM_STEP;
 	else if (button == 5)
-		mlx->scene.zoom = mlx->scene.zoom / ZOOM_STEP;
+		mlx->scene.zoom -= ZOOM_STEP;
 	x = 0;
 	y = 0;
 //	draw_image(mlx);

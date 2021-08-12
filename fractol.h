@@ -7,7 +7,7 @@
 # define DEFAULT_RES_Y 768
 # define DEFAULT_ZOOM 4
 # define STEP 15
-# define ZOOM_STEP 1
+# define ZOOM_STEP 0.5
 
 
 typedef enum
