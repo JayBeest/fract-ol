@@ -1,15 +1,5 @@
-#ifndef FRACTOL_H
-# define FRACTOL_H
-# include <X11/Xlib.h>
-# include "../libft/libft.h"
-
-# define PROJECT "Fract'ol"
-# define DEFAULT_RES_X 800
-# define DEFAULT_RES_Y 600
-# define DEFAULT_ZOOM 4
-# define STEP 15
-# define ZOOM_FACTOR 1.1
-
+#ifndef DATA_TYPES_H
+# define DATA_TYPES_H
 
 typedef enum
 {
@@ -21,7 +11,7 @@ typedef enum
 {
 	JULIA = 1,
 	MANDELBROT = 2
-}			t_fractal_type;
+}			t_fractol_type;
 
 typedef enum
 {
@@ -74,7 +64,7 @@ typedef struct
 typedef struct
 {
 	t_resolution 	res;
-	t_fractal_type	current_fractal;
+	t_fractol_type	current_fractal;
 	t_position 		offset;
 	t_position		mouse;
 	//debug
@@ -91,8 +81,5 @@ typedef struct
 	t_scene		scene;
 	t_img_data	image;
 }		t_mlx;
-
-void	init_default_scene(t_scene *scene);
-void	init_scene(t_scene *scene);
 
 #endif
