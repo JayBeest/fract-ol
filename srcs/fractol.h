@@ -1,13 +1,14 @@
 #ifndef FRACTOL_H
 # define FRACTOL_H
 # include <X11/Xlib.h>
+# include "../libft/libft.h"
 
 # define PROJECT "Fract'ol"
-# define DEFAULT_RES_X 1024
-# define DEFAULT_RES_Y 768
+# define DEFAULT_RES_X 800
+# define DEFAULT_RES_Y 600
 # define DEFAULT_ZOOM 4
 # define STEP 15
-# define ZOOM_STEP 0.5
+# define ZOOM_FACTOR 1.1
 
 
 typedef enum
@@ -75,6 +76,11 @@ typedef struct
 	t_resolution 	res;
 	t_fractal_type	current_fractal;
 	t_position 		offset;
+	t_position		mouse;
+	//debug
+	t_grid_position grid_position;
+	t_complex_position complex_position;
+	int n;
 	double 			zoom;
 }		t_scene;
 
