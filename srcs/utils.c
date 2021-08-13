@@ -1,15 +1,5 @@
 #include "datatypes.h"
 
-void    put_pixel(t_img_data *image, t_position position, unsigned int colour)
-{
-	char	*pixel_address;
-	int		offset;
-
-	offset = position.y * image->line_lenght + position.x * (image->bits_per_pixel / 8);
-	pixel_address = image->img_address + offset;
-	*(unsigned int *)pixel_address = colour;
-}
-
 unsigned int fetch_colour(int n)
 {
 	unsigned int		colour;
@@ -25,3 +15,8 @@ unsigned int fetch_colour(int n)
 	return (test_colour);
 }
 
+void return_to_origin(t_scene *scene)
+{
+	scene->offset.x = -100;
+	scene->offset.y = 0;
+}

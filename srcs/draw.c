@@ -5,6 +5,17 @@
 #include "menu.h"
 
 #include "main.h"
+#include "stdio.h"
+
+void    put_pixel(t_img_data *image, t_position position, unsigned int colour)
+{
+	char	*pixel_address;
+	int		offset;
+
+	offset = position.y * image->line_lenght + position.x * (image->bits_per_pixel / 8);
+	pixel_address = image->img_address + offset;
+	*(unsigned int *)pixel_address = colour;
+}
 
 void	calculate_complex_position(t_scene *scene, t_position pos)
 {
@@ -15,9 +26,11 @@ void	calculate_complex_position(t_scene *scene, t_position pos)
 	complex_pos = &scene->complex_position;
 	grid_position.x = (double)pos.x - (double)scene->res.x / 2 + scene->offset.x;
 	grid_position.y = (double)pos.y - (double)scene->res.y / 2 + scene->offset.y;
-	zoom = ((double)scene->res.x / scene->zoom);
-	complex_pos->c.real = grid_position.x / zoom * DEFAULT_ZOOM;
-	complex_pos->c.i = - grid_position.y / zoom * DEFAULT_ZOOM;
+//	printf("gridpos.x: %f\n", grid_position.x);
+//	printf("gridpos.y: %f\n", grid_position.y);
+	zoom = (((double)scene->res.x / 2) / scene->zoom );
+	complex_pos->c.real = grid_position.x / zoom;
+	complex_pos->c.i = - grid_position.y / zoom;
 	complex_pos->z.real = 0;
 	complex_pos->z.i = 0;
 }

@@ -23,9 +23,11 @@ int debug_menu(t_mlx *mlx)
 	t_resolution	max_res;
 	char	real[50];
 	char 	i[50];
+	char 	zoom[50];
 
 	snprintf(real, 40, "real: %f\n", mlx->scene.complex_position.c.real);
 	snprintf(i, 40, "i   : %f\n", mlx->scene.complex_position.c.i);
+	snprintf(zoom, 40, "zoom: %f\n", mlx->scene.zoom);
 	color = 0xffffff;
 	min_res.x = 0;
 	min_res.y = 0;
@@ -40,7 +42,7 @@ int debug_menu(t_mlx *mlx)
 			mlx_string_put(mlx->mlx_ptr, mlx->mlx_window, pos.x, pos.y + 10, color, ft_itoa(mlx->scene.mouse.y));
 			mlx_string_put(mlx->mlx_ptr, mlx->mlx_window, pos.x, pos.y + 30, color, real);
 			mlx_string_put(mlx->mlx_ptr, mlx->mlx_window, pos.x, pos.y + 40, color, i);
-
+			mlx_string_put(mlx->mlx_ptr, mlx->mlx_window, pos.x, pos.y + 60, color, zoom);
 		}
 	return (1);
 }
