@@ -28,7 +28,7 @@ void	calculate_complex_position(t_scene *scene, t_position pos)
 	grid_position.y = (double)pos.y - (double)scene->res.y / 2 + scene->offset.y;
 //	printf("gridpos.x: %f\n", grid_position.x);
 //	printf("gridpos.y: %f\n", grid_position.y);
-	zoom = (((double)scene->res.x / 2) / scene->zoom );
+	zoom = (((double)scene->res.x) / DEFAULT_ZOOM / scene->zoom);
 	complex_pos->c.real = grid_position.x / zoom;
 	complex_pos->c.i = - grid_position.y / zoom;
 	complex_pos->z.real = 0;
