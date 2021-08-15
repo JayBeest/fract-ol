@@ -17,11 +17,13 @@ void	init_default_scene(t_scene *scene)
 	scene->res.x = RESOLUTION_X;
 	scene->res.y = RESOLUTION_Y;
 	scene->current_fractal = MANDELBROT;
-	scene->zoom = 10;
+	scene->zoom = 100;
 	scene->offset.x = -100;
 	scene->offset.y = 0;
 	scene->mouse.x = -1;
 	scene->mouse.y = -1;
+	scene->julia.real = 0.2345;
+	scene->julia.i = 1.23;
 }
 
 void 	init_mlx(t_mlx *mlx, const t_scene *scene)

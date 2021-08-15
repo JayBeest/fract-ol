@@ -43,5 +43,5 @@ int julia(t_complex_position complex_position, t_complex julia)
 		if (z.real * z.real + z.i * z.i < 4)
 			return (iterations);
 	}
-	return (0);
+	return (30);
 }

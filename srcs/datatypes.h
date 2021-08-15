@@ -67,6 +67,7 @@ typedef struct
 	t_fractol_type	current_fractal;
 	t_position 		offset;
 	t_position		mouse;
+	t_complex		julia;
 	//debug
 	t_grid_position grid_position;
 	t_complex_position complex_position;

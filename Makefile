@@ -19,6 +19,6 @@ clean:
 	rm -f $(OBJ)
 
 fclean: clean
-	rm -f a.out
+	rm -f $(NAME)
 
-re: fclean make
+re: fclean all

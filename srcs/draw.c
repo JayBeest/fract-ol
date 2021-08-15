@@ -28,7 +28,8 @@ void	calculate_complex_position(t_scene *scene, t_position pos)
 	grid_position.y = (double)pos.y - (double)scene->res.y / 2 + scene->offset.y;
 //	printf("gridpos.x: %f\n", grid_position.x);
 //	printf("gridpos.y: %f\n", grid_position.y);
-	zoom = (((double)scene->res.x) / DEFAULT_ZOOM / scene->zoom);
+	zoom = (((double)scene->res.y) / scene->zoom * DEFAULT_ZOOM);
+
 	complex_pos->c.real = grid_position.x / zoom;
 	complex_pos->c.i = - grid_position.y / zoom;
 	complex_pos->z.real = 0;
@@ -40,10 +41,10 @@ unsigned int calculate_fractal(t_scene *scene, t_position pos)
 	t_complex_position	*complex_position;
 
 	int 				n;
-
 	complex_position = &scene->complex_position;
 	calculate_complex_position(scene, pos);
 	n = mandelbrot(*complex_position);
+//	n = julia(*complex_position, scene->julia);
 	return (fetch_colour(n));
 }
 
