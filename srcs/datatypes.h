@@ -20,10 +20,27 @@ typedef enum
 	S = 1,
 	W = 13,
 	M = 46,
+	J = 38,
+	K = 40,
+	L = 37,
 	PLUS = 24,
 	MIN = 27,
 	ESC = 53
 }			t_key;
+
+typedef struct
+{
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+}			t_rgb;
+
+typedef struct
+{
+	int	colour_mixer_1;
+	int colour_mixer_2;
+	int colour_mixer_3;
+}			t_colours;
 
 typedef struct
 {
@@ -81,6 +98,7 @@ typedef struct
 	t_grid_position			offset;
 	t_position				mouse;
 	t_complex				julia;
+	t_colours				colours;
 	//debug
 	t_position				grid_position;
 	t_complex_position		complex_position;

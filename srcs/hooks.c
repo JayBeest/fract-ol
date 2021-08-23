@@ -43,8 +43,10 @@ int mouse_move(int x, int y, t_mlx *mlx)
 
 //	calculate_complex_plane(&mlx->scene);
 	calculate_complex_position(&mlx->scene, mouse_pos);
+	mlx->scene.julia = mlx->scene.complex_position.c;
 	mlx->scene.mouse.x = x;
 	mlx->scene.mouse.y = y;
+//	draw_fractal_to_image(mlx);
 	//	redraw_image(mlx);
 	return (1);
 }
@@ -62,6 +64,12 @@ int	keypress(t_key key_code, t_mlx *mlx)
 		mlx->scene.offset.y -= STEP;
 	else if (key_code == M)
 		mlx->scene.zoom_to_mouse = TRUE;
+	else if (key_code == J)
+		mlx->scene.colours.colour_mixer_1 += 5;
+	else if (key_code == K)
+		mlx->scene.colours.colour_mixer_2 += 5;
+	else if (key_code == L)
+		mlx->scene.colours.colour_mixer_2++;
 	else if (key_code == PLUS && mlx->scene.iteration_amount < 1000)
 		mlx->scene.iteration_amount += 10;
 	else if (key_code == MIN && mlx->scene.iteration_amount > 10)

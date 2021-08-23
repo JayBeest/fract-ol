@@ -19,17 +19,11 @@ void    put_pixel(t_img_data *image, t_position position, unsigned int colour)
 
 void	calculate_complex_position(t_scene *scene, t_position pos)
 {
-//	t_position 				*grid_position;
 	t_complex_position		*complex_pos;
 	t_complex_plane_info	plane;
 
-//	grid_position = &scene->grid_position;
-	complex_pos = &scene->complex_position;
 	plane = scene->plane;
-//	grid_position->x = (double)pos.x - (double)(scene->res.x >> 1) + scene->plane.offset.x;
-//	grid_position->y = (double)pos.y - (double)(scene->res.y >> 1) + scene->plane.offset.y;
-//	grid_position->x = pos.x;
-//	grid_position->y = pos.y;
+	complex_pos = &scene->complex_position;
 	complex_pos->c.re = pos.x * plane.step + scene->plane.min.re;
 	complex_pos->c.im = pos.y * plane.step + scene->plane.min.im;
 	complex_pos->z.re = 0;
@@ -44,8 +38,8 @@ unsigned int calculate_fractal(t_scene *scene, t_position pos)
 	complex_position = &scene->complex_position;
 	calculate_complex_position(scene, pos);
 	n = mandelbrot(*complex_position, scene->iteration_amount);
-//	n = julia(*complex_position, scene->julia);
-	return (fetch_colour(n));
+//	n = julia(*complex_position, scene->julia, scene->iteration_amount);
+	return (fetch_colour(n, scene->colours));
 }
 
 void calculate_complex_plane(t_scene *scene)

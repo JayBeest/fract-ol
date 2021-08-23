@@ -19,14 +19,17 @@ void	init_default_scene(t_scene *scene)
 	scene->current_fractal = MANDELBROT;
 	scene->iteration_amount = DEFAULT_ITERATION;
 	scene->zoom_to_mouse = FALSE;
+	scene->colours.colour_mixer_1 = 40;
+	scene->colours.colour_mixer_2 = 5;
+	scene->colours.colour_mixer_3 = 1;
 //	scene->zoom = (scene->res.y >> 1) / 1.2;
 	scene->zoom = 200;
-	scene->offset.x = -100;
+	scene->offset.x = 0;
 	scene->offset.y = 0;
 	scene->mouse.x = -1;
 	scene->mouse.y = -1;
-	scene->julia.re = 0.2345;
-	scene->julia.im = 1.23;
+	scene->julia.re = 0;
+	scene->julia.im = 0;
 }
 
 void 	init_mlx(t_mlx *mlx, const t_scene *scene)
