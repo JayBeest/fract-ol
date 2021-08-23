@@ -9,7 +9,7 @@
 
 void    put_pixel(t_img_data *image, t_position position, unsigned int colour)
 {
-	char	*pixel_./faddress;
+	char	*pixel_address;
 	int		offset;
 
 	offset = position.y * image->line_lenght + position.x * (image->bits_per_pixel / 8);
