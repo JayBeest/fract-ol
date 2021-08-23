@@ -5,6 +5,7 @@
 #include "utils.h"
 
 #include "main.h"
+#include <stdio.h>
 
 int	kill(t_mlx *mlx)
 {
@@ -14,26 +15,21 @@ int	kill(t_mlx *mlx)
 
 int mouse_button(int button, int x, int y, t_mlx *mlx)
 {
-	t_position	mouse;
-	t_position	*offset;
+	t_position		mouse;
+	t_grid_position	*offset;
 
 	mouse.x = x;
 	mouse.y = y;
 	offset = &mlx->scene.offset;
+	printf("button nr.: %d\n", button);
 	if (button == 1)
 		center_on_mouse(mouse, &mlx->scene);
-	if (button == 2)
+	else if (button == 2)
 		return_to_origin(&mlx->scene);
 	else if (button == 4)
-	{
-		mlx->scene.zoom *= ZOOM_FACTOR;
-//		offset-> = offset->x + (mlx->scene.res.x >> 1)ZOOM_FACTOR;
-	}
+ 		zoom_in(&mlx->scene, mouse);
 	else if (button == 5)
-	{
-		mlx->scene.zoom /= ZOOM_FACTOR;
-//		mlx->scene.plane.offset.y /= ZOOM_FACTOR;
-	}
+		zoom_out(&mlx->scene, mouse);
 	draw_fractal_to_image(mlx);
 	return (1);
 }
@@ -55,6 +51,7 @@ int mouse_move(int x, int y, t_mlx *mlx)
 
 int	keypress(t_key key_code, t_mlx *mlx)
 {
+	printf("key_code nr.: %d\n", key_code);
 	if (key_code == A)
 		mlx->scene.offset.x -= STEP;
 	else if (key_code == D)
@@ -63,7 +60,14 @@ int	keypress(t_key key_code, t_mlx *mlx)
 		mlx->scene.offset.y += STEP;
 	else if (key_code == W)
 		mlx->scene.offset.y -= STEP;
-	if (key_code == ESC)
+	else if (key_code == M)
+		mlx->scene.zoom_to_mouse = TRUE;
+	else if (key_code == PLUS && mlx->scene.iteration_amount < 1000)
+		mlx->scene.iteration_amount += 10;
+	else if (key_code == MIN && mlx->scene.iteration_amount > 10)
+		mlx->scene.iteration_amount -= 10;
+
+	else if (key_code == ESC)
 		kill(mlx);
 	draw_fractal_to_image(mlx);
 	return (1);

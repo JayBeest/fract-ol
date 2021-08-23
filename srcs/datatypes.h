@@ -19,13 +19,16 @@ typedef enum
 	D = 2,
 	S = 1,
 	W = 13,
+	M = 46,
+	PLUS = 24,
+	MIN = 27,
 	ESC = 53
 }			t_key;
 
 typedef struct
 {
-	double real;
-	double i;
+	double re;
+	double im;
 }			t_complex;
 
 typedef struct
@@ -54,8 +57,9 @@ typedef struct
 
 typedef struct
 {
-	t_complex	min_pos;
-	t_complex	max_pos;
+	t_complex	min;
+	t_complex	max;
+	double 		step;
 }			t_complex_plane_info;
 
 typedef struct
@@ -63,23 +67,25 @@ typedef struct
 	void	*img_ptr;
 	char	*img_address;
 	int 	bits_per_pixel;
-	int 	line_lenght;
+	int 	line_length;
 	int 	endian;
 }			t_img_data;
 
 typedef struct
 {
-	t_resolution 	res;
-	t_fractol_type	current_fractal;
+	t_resolution			res;
+	t_fractol_type			current_fractal;
+	int 					iteration_amount;
+	t_bool					zoom_to_mouse;
 	t_complex_plane_info	plane;
-	t_position 		offset;
-	t_position		mouse;
-	t_complex		julia;
+	t_grid_position			offset;
+	t_position				mouse;
+	t_complex				julia;
 	//debug
-	t_position grid_position;
-	t_complex_position complex_position;
-	int n;
-	double 			zoom;
+	t_position				grid_position;
+	t_complex_position		complex_position;
+	int						n;
+	double					zoom;
 }		t_scene;
 
 typedef struct

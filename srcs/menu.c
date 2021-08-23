@@ -25,9 +25,9 @@ int debug_menu(t_mlx *mlx)
 	char 	i[50];
 	char 	zoom[50];
 
-	snprintf(real, 40, "real: %f\n", mlx->scene.complex_position.c.real);
-	snprintf(i, 40, "i   : %f\n", mlx->scene.complex_position.c.i);
-	snprintf(zoom, 40, "zoom: %f\n", mlx->scene.zoom);
+	snprintf(real, 40, "re: %f\n", mlx->scene.complex_position.c.re);
+	snprintf(i, 40, "im   : %f\n", mlx->scene.complex_position.c.im);
+	snprintf(zoom, 40, "zoom: %f\n", mlx->scene.zoom / 200);
 	color = 0xffffff;
 	min_res.x = 0;
 	min_res.y = 0;
@@ -43,6 +43,7 @@ int debug_menu(t_mlx *mlx)
 			mlx_string_put(mlx->mlx_ptr, mlx->mlx_window, pos.x, pos.y + 30, color, real);
 			mlx_string_put(mlx->mlx_ptr, mlx->mlx_window, pos.x, pos.y + 40, color, i);
 			mlx_string_put(mlx->mlx_ptr, mlx->mlx_window, pos.x, pos.y + 60, color, zoom);
+			mlx_string_put(mlx->mlx_ptr, mlx->mlx_window, pos.x, pos.y + 80, color, ft_itoa(mlx->scene.iteration_amount));
 		}
 	return (1);
 }

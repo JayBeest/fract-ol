@@ -1,6 +1,6 @@
 #include "datatypes.h"
 
-int mandelbrot(t_complex_position complex_position)
+int mandelbrot(t_complex_position complex_position, int max_iterations)
 {
 	int			iterations;
 	double 		temp;
@@ -8,17 +8,17 @@ int mandelbrot(t_complex_position complex_position)
 	t_complex 	z;
 
 	c = complex_position.c;
-	//	printf("c.real = %f\n", c.real);
-	//	printf("c.i = %f\n", c.i);
+	//	printf("c.re = %f\n", c.re);
+	//	printf("c.im = %f\n", c.im);
 	z = complex_position.z;
 	iterations = 0;
-	while (iterations < 30)
+	while (iterations < max_iterations)
 	{
-		temp = z.real;
-		z.real = z.real * z.real - z.i * z.i + c.real;
-		z.i = 2 * temp * z.i + c.i;
+		temp = z.re;
+		z.re = z.re * z.re - z.im * z.im + c.re;
+		z.im = 2 * temp * z.im + c.im;
 		iterations++;
-		if (z.real * z.real + z.i * z.i > 4)
+		if (z.re * z.re + z.im * z.im > 4)
 			return (iterations);
 	}
 	return (0);
@@ -30,17 +30,17 @@ int julia(t_complex_position complex_position, t_complex julia)
 	double 		temp;
 	t_complex 	z;
 
-	//	printf("c.real = %f\n", c.real);
-	//	printf("c.i = %f\n", c.i);
+	//	printf("c.re = %f\n", c.re);
+	//	printf("c.im = %f\n", c.im);
 	z = complex_position.z;
 	iterations = 0;
 	while (iterations < 30)
 	{
-		temp = z.real;
-		z.real = temp * temp - z.i * z.i + julia.real;
-		z.i = 2 * temp * z.i + julia.i;
+		temp = z.re;
+		z.re = temp * temp - z.im * z.im + julia.re;
+		z.im = 2 * temp * z.im + julia.im;
 		iterations++;
-		if (z.real * z.real + z.i * z.i < 4)
+		if (z.re * z.re + z.im * z.im < 4)
 			return (iterations);
 	}
 	return (30);
