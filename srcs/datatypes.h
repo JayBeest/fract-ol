@@ -1,6 +1,7 @@
 #ifndef DATA_TYPES_H
 # define DATA_TYPES_H
 
+
 typedef enum
 {
 	FALSE = 0,
@@ -9,8 +10,8 @@ typedef enum
 
 typedef enum
 {
-	JULIA = 1,
-	MANDELBROT = 2
+	MANDELBROT = 0,
+	JULIA = 1
 }			t_fractol_type;
 
 typedef enum
@@ -20,11 +21,14 @@ typedef enum
 	S = 1,
 	W = 13,
 	M = 46,
+	N = 45,
 	J = 38,
 	K = 40,
 	L = 37,
 	PLUS = 24,
 	MIN = 27,
+	DOWN = 125,
+	UP = 126,
 	ESC = 53
 }			t_key;
 
@@ -88,7 +92,7 @@ typedef struct
 	int 	endian;
 }			t_img_data;
 
-typedef struct
+typedef struct s_scene
 {
 	t_resolution			res;
 	t_fractol_type			current_fractal;
@@ -98,6 +102,7 @@ typedef struct
 	t_grid_position			offset;
 	t_position				mouse;
 	t_complex				julia;
+	t_bool					julia_animation;
 	t_colours				colours;
 	//debug
 	t_position				grid_position;
@@ -113,5 +118,7 @@ typedef struct
 	t_scene		scene;
 	t_img_data	image;
 }		t_mlx;
+
+typedef int(*t_fractal_f_ptr)(t_scene);
 
 #endif

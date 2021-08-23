@@ -22,7 +22,7 @@ int mouse_button(int button, int x, int y, t_mlx *mlx)
 	mouse.y = y;
 	offset = &mlx->scene.offset;
 	printf("button nr.: %d\n", button);
-	if (button == 1)
+	if (button == 1 && mlx->scene.current_fractal == MANDELBROT)
 		center_on_mouse(mouse, &mlx->scene);
 	else if (button == 2)
 		return_to_origin(&mlx->scene);
@@ -36,17 +36,19 @@ int mouse_button(int button, int x, int y, t_mlx *mlx)
 
 int mouse_move(int x, int y, t_mlx *mlx)
 {
-	t_position	mouse_pos;
+	t_position		mouse_pos;
 
 	mouse_pos.x = x;
 	mouse_pos.y = y;
-
-//	calculate_complex_plane(&mlx->scene);
-	calculate_complex_position(&mlx->scene, mouse_pos);
-	mlx->scene.julia = mlx->scene.complex_position.c;
-	mlx->scene.mouse.x = x;
-	mlx->scene.mouse.y = y;
-//	draw_fractal_to_image(mlx);
+	if (mouse_pos.x >= 0 && mouse_pos.y >= 0 && mouse_pos.x <= mlx->scene.res.x && mouse_pos.y <= mlx->scene.res.y)
+	{
+		calculate_complex_position(&mlx->scene, mouse_pos);
+		if (mlx->scene.julia_animation)
+			mlx->scene.julia = mlx->scene.complex_position.c;
+		mlx->scene.mouse.x = x;
+		mlx->scene.mouse.y = y;
+		draw_fractal_to_image(mlx);
+	}
 	//	redraw_image(mlx);
 	return (1);
 }
@@ -63,7 +65,9 @@ int	keypress(t_key key_code, t_mlx *mlx)
 	else if (key_code == W)
 		mlx->scene.offset.y -= STEP;
 	else if (key_code == M)
-		mlx->scene.zoom_to_mouse = TRUE;
+		switch_bool(&mlx->scene.zoom_to_mouse);
+	else if (key_code == N)
+		switch_bool(&mlx->scene.julia_animation);
 	else if (key_code == J)
 		mlx->scene.colours.colour_mixer_1 += 5;
 	else if (key_code == K)
@@ -74,7 +78,10 @@ int	keypress(t_key key_code, t_mlx *mlx)
 		mlx->scene.iteration_amount += 10;
 	else if (key_code == MIN && mlx->scene.iteration_amount > 10)
 		mlx->scene.iteration_amount -= 10;
-
+	else if (key_code == DOWN && mlx->scene.current_fractal < JULIA)
+		mlx->scene.current_fractal++;
+	else if (key_code == UP && mlx->scene.current_fractal > MANDELBROT)
+		mlx->scene.current_fractal--;
 	else if (key_code == ESC)
 		kill(mlx);
 	draw_fractal_to_image(mlx);

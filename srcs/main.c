@@ -12,6 +12,11 @@
 //
 //}
 
+void	init_scene(t_scene *scene)
+{
+
+}
+
 void	init_default_scene(t_scene *scene)
 {
 	scene->res.x = RESOLUTION_X;
@@ -30,6 +35,7 @@ void	init_default_scene(t_scene *scene)
 	scene->mouse.y = -1;
 	scene->julia.re = 0;
 	scene->julia.im = 0;
+	scene->julia_animation = FALSE;
 }
 
 void 	init_mlx(t_mlx *mlx, const t_scene *scene)

@@ -32,13 +32,14 @@ void	calculate_complex_position(t_scene *scene, t_position pos)
 
 unsigned int calculate_fractal(t_scene *scene, t_position pos)
 {
-	t_complex_position	*complex_position;
-	int 				n;
+	int 					n;
+	const t_fractal_f_ptr	fun_ptr[3] = {
+			[MANDELBROT] = mandelbrot,
+			[JULIA] = julia
+	};
 
-	complex_position = &scene->complex_position;
 	calculate_complex_position(scene, pos);
-	n = mandelbrot(*complex_position, scene->iteration_amount);
-//	n = julia(*complex_position, scene->julia, scene->iteration_amount);
+	n = fun_ptr[scene->current_fractal](*scene);
 	return (fetch_colour(n, scene->colours));
 }
 
@@ -60,8 +61,8 @@ void calculate_complex_plane(t_scene *scene)
 
 int draw_fractal_to_image(t_mlx *mlx)
 {
-	t_position		position;
-	unsigned int	colour;
+	t_position						position;
+	unsigned int					colour;
 
 	calculate_complex_plane(&mlx->scene);
 	position.y = 0;
