@@ -1,5 +1,7 @@
 #include "datatypes.h"
 
+#include <stdio.h>
+
 unsigned int fetch_colour(int n)
 {
 	unsigned int		colour;
@@ -19,4 +21,10 @@ void return_to_origin(t_scene *scene)
 {
 	scene->offset.x = -100;
 	scene->offset.y = 0;
+}
+
+void center_on_mouse(t_position mouse, t_scene *scene)
+{
+	scene->offset.x += mouse.x - (scene->res.x >> 1);
+	scene->offset.y += mouse.y - (scene->res.y >> 1);
 }

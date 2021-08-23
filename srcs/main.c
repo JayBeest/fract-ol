@@ -17,7 +17,8 @@ void	init_default_scene(t_scene *scene)
 	scene->res.x = RESOLUTION_X;
 	scene->res.y = RESOLUTION_Y;
 	scene->current_fractal = MANDELBROT;
-	scene->zoom = 100;
+//	scene->zoom = (scene->res.y >> 1) / 1.2;
+	scene->zoom = 200;
 	scene->offset.x = -100;
 	scene->offset.y = 0;
 	scene->mouse.x = -1;

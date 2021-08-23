@@ -1,15 +1,15 @@
 #include "datatypes.h"
 #include "../mlx/mlx.h"
+#include "main.h"
 #include "utils.h"
 #include "fractols.h"
 #include "menu.h"
 
-#include "main.h"
 #include "stdio.h"
 
 void    put_pixel(t_img_data *image, t_position position, unsigned int colour)
 {
-	char	*pixel_address;
+	char	*pixel_./faddress;
 	int		offset;
 
 	offset = position.y * image->line_lenght + position.x * (image->bits_per_pixel / 8);
@@ -19,19 +19,17 @@ void    put_pixel(t_img_data *image, t_position position, unsigned int colour)
 
 void	calculate_complex_position(t_scene *scene, t_position pos)
 {
-	double 				zoom;
-	t_grid_position 	grid_position;
+	t_position 			*grid_position;
 	t_complex_position	*complex_pos;
 
+	grid_position = &scene->grid_position;
 	complex_pos = &scene->complex_position;
-	grid_position.x = (double)pos.x - (double)scene->res.x / 2 + scene->offset.x;
-	grid_position.y = (double)pos.y - (double)scene->res.y / 2 + scene->offset.y;
-//	printf("gridpos.x: %f\n", grid_position.x);
-//	printf("gridpos.y: %f\n", grid_position.y);
-	zoom = (((double)scene->res.y) / scene->zoom * DEFAULT_ZOOM);
-
-	complex_pos->c.real = grid_position.x / zoom;
-	complex_pos->c.i = - grid_position.y / zoom;
+//	grid_position->x = (double)pos.x - (double)(scene->res.x >> 1) + scene->plane.offset.x;
+//	grid_position->y = (double)pos.y - (double)(scene->res.y >> 1) + scene->plane.offset.y;
+	grid_position->x = pos.x;
+	grid_position->y = pos.y;
+	complex_pos->c.real = grid_position->x / scene->zoom + scene->plane.min_pos.real;
+	complex_pos->c.i = grid_position->y / scene->zoom + scene->plane.min_pos.i;
 	complex_pos->z.real = 0;
 	complex_pos->z.i = 0;
 }
@@ -39,8 +37,8 @@ void	calculate_complex_position(t_scene *scene, t_position pos)
 unsigned int calculate_fractal(t_scene *scene, t_position pos)
 {
 	t_complex_position	*complex_position;
-
 	int 				n;
+
 	complex_position = &scene->complex_position;
 	calculate_complex_position(scene, pos);
 	n = mandelbrot(*complex_position);
@@ -48,11 +46,26 @@ unsigned int calculate_fractal(t_scene *scene, t_position pos)
 	return (fetch_colour(n));
 }
 
+void calculate_complex_plane(t_scene *scene)
+{
+	t_complex	*min_pos;
+	t_complex	*max_pos;
+
+	min_pos = &scene->plane.min_pos;
+	max_pos = &scene->plane.max_pos;
+
+	min_pos->real = ((double)scene->offset.x - RESOLUTION_X / 2) / scene->zoom;
+	max_pos->real = min_pos->real + RESOLUTION_X / scene->zoom;
+	min_pos->i = ((double)scene->offset.y - RESOLUTION_Y / 2) /  scene->zoom;
+	max_pos->i = min_pos->i + RESOLUTION_Y / scene->zoom;
+}
+
 int draw_fractal_to_image(t_mlx *mlx)
 {
 	t_position		position;
 	unsigned int	colour;
 
+	calculate_complex_plane(&mlx->scene);
 	position.y = 0;
 	while (position.y < mlx->scene.res.y)
 	{

@@ -54,6 +54,12 @@ typedef struct
 
 typedef struct
 {
+	t_complex	min_pos;
+	t_complex	max_pos;
+}			t_complex_plane_info;
+
+typedef struct
+{
 	void	*img_ptr;
 	char	*img_address;
 	int 	bits_per_pixel;
@@ -65,11 +71,12 @@ typedef struct
 {
 	t_resolution 	res;
 	t_fractol_type	current_fractal;
+	t_complex_plane_info	plane;
 	t_position 		offset;
 	t_position		mouse;
 	t_complex		julia;
 	//debug
-	t_grid_position grid_position;
+	t_position grid_position;
 	t_complex_position complex_position;
 	int n;
 	double 			zoom;

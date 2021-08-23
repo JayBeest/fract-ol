@@ -5,7 +5,7 @@
 # define RESOLUTION_Y 600
 # define DEFAULT_ZOOM 100 / 3
 # define STEP 15
-# define ZOOM_FACTOR 1.025
+# define ZOOM_FACTOR 1.02
 # include <X11/Xlib.h>
 
 #endif

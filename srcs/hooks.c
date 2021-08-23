@@ -2,6 +2,7 @@
 #include "../mlx/mlx.h"
 #include "datatypes.h"
 #include "draw.h"
+#include "utils.h"
 
 #include "main.h"
 
@@ -13,28 +14,41 @@ int	kill(t_mlx *mlx)
 
 int mouse_button(int button, int x, int y, t_mlx *mlx)
 {
-	if (button == 4)
+	t_position	mouse;
+	t_position	*offset;
+
+	mouse.x = x;
+	mouse.y = y;
+	offset = &mlx->scene.offset;
+	if (button == 1)
+		center_on_mouse(mouse, &mlx->scene);
+	if (button == 2)
+		return_to_origin(&mlx->scene);
+	else if (button == 4)
+	{
 		mlx->scene.zoom *= ZOOM_FACTOR;
+//		offset-> = offset->x + (mlx->scene.res.x >> 1)ZOOM_FACTOR;
+	}
 	else if (button == 5)
+	{
 		mlx->scene.zoom /= ZOOM_FACTOR;
-	x = 0;
-	y = 0;
+//		mlx->scene.plane.offset.y /= ZOOM_FACTOR;
+	}
 	draw_fractal_to_image(mlx);
 	return (1);
 }
 
 int mouse_move(int x, int y, t_mlx *mlx)
 {
-	t_position	position;
+	t_position	mouse_pos;
 
-	position.x = x;
-	position.y = y;
+	mouse_pos.x = x;
+	mouse_pos.y = y;
 
-	calculate_complex_position(&mlx->scene, position);
+//	calculate_complex_plane(&mlx->scene);
+	calculate_complex_position(&mlx->scene, mouse_pos);
 	mlx->scene.mouse.x = x;
 	mlx->scene.mouse.y = y;
-	//	printf("x: %d\n", x);s
-	//	printf("y: %d\n", y);
 	//	redraw_image(mlx);
 	return (1);
 }
