@@ -2,6 +2,8 @@
 # define UTILS_H
 
 unsigned int	fetch_colour(int n, t_colours colour, int max_iterations);
+unsigned int	fetch_colour2(int n, t_colours colour, int max_iterations);
+unsigned int	fetch_colour3(int n, t_colours colour, int max_iterations);
 void return_to_origin(t_scene *scene);
 void center_on_mouse(t_position mouse, t_scene *scene);
 void zoom_in(t_scene *scene, t_position mouse);

@@ -40,7 +40,7 @@ unsigned int calculate_fractal(t_scene *scene, t_position pos)
 
 	calculate_complex_position(scene, pos);
 	n = fun_ptr[scene->current_fractal](*scene);
-	return (fetch_colour(n, scene->colours, scene->iteration_amount));
+	return (fetch_colour3(n, scene->colours, scene->iteration_amount));
 }
 
 void calculate_complex_plane(t_scene *scene)

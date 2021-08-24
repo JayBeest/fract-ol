@@ -10,6 +10,19 @@ typedef enum
 
 typedef enum
 {
+	NO_ERROR = 0,
+	NOT_FRACTAL_TYPE = 1,
+	TOO_MANY_ARGS = 2
+}			t_err_no;
+
+typedef struct
+{
+	t_bool		bool;
+	t_err_no	error_nr;
+}			t_bool_err;
+
+typedef enum
+{
 	MANDELBROT = 0,
 	JULIA = 1
 }			t_fractol_type;
