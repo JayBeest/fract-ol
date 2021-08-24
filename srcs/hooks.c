@@ -42,16 +42,15 @@ int mouse_move(int x, int y, t_mlx *mlx)
 	mouse_pos.y = y;
 	if (mouse_pos.x >= 0 && mouse_pos.y >= 0 && mouse_pos.x <= mlx->scene.res.x && mouse_pos.y <= mlx->scene.res.y)
 	{
-		mlx->scene.mouse.x = x;
-		mlx->scene.mouse.y = y;
 		calculate_complex_position(&mlx->scene, mouse_pos);
+		mlx->scene.mouse = mouse_pos;
 		if (mlx->scene.julia_animation)
 		{
 			mlx->scene.julia = mlx->scene.complex_position.c;
 			draw_fractal_to_image(mlx);
 		}
+		redraw_image(mlx);
 	}
-	//	redraw_image(mlx);
 	return (1);
 }
 
@@ -70,12 +69,16 @@ int	keypress(t_key key_code, t_mlx *mlx)
 		switch_bool(&mlx->scene.zoom_to_mouse);
 	else if (key_code == N)
 		switch_bool(&mlx->scene.julia_animation);
+	else if (key_code == P)
+		switch_bool(&mlx->scene.psycho);
 	else if (key_code == J)
 		mlx->scene.colours.colour_mixer_1 += 5;
 	else if (key_code == K)
 		mlx->scene.colours.colour_mixer_2 += 5;
 	else if (key_code == L)
 		mlx->scene.colours.colour_mixer_2++;
+	else if (key_code == Z)
+		return_to_origin(&mlx->scene);
 	else if (key_code == PLUS && mlx->scene.iteration_amount < 1000)
 		mlx->scene.iteration_amount += 10;
 	else if (key_code == MIN && mlx->scene.iteration_amount > 10)

@@ -36,6 +36,7 @@ void	init_default_scene(t_scene *scene)
 	scene->julia.re = 0;
 	scene->julia.im = 0;
 	scene->julia_animation = FALSE;
+	scene->psycho = FALSE;
 }
 
 void 	init_mlx(t_mlx *mlx, const t_scene *scene)
@@ -68,7 +69,8 @@ int	main(int argc, char **argv)
 	mlx_hook(mlx.mlx_window, ButtonPress, ButtonPressMask, mouse_button, &mlx);
 	mlx_hook(mlx.mlx_window, MotionNotify, PointerMotionMask, mouse_move, &mlx);
 
-	mlx_loop_hook(mlx.mlx_ptr,redraw_image, &mlx);
+	mlx_loop_hook(mlx.mlx_ptr,draw_fractal_to_image, &mlx);
+//	mlx_loop_hook(mlx.mlx_ptr,redraw_image, &mlx);
 	mlx_loop(mlx.mlx_ptr);
 	return (0);
 }

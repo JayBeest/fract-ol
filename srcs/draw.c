@@ -66,6 +66,8 @@ int draw_fractal_to_image(t_mlx *mlx)
 
 	calculate_complex_plane(&mlx->scene);
 	position.y = 0;
+	if (mlx->scene.psycho)
+		mlx->scene.colours.colour_mixer_3++;
 	while (position.y < mlx->scene.res.y)
 	{
 		position.x = 0;
@@ -77,9 +79,9 @@ int draw_fractal_to_image(t_mlx *mlx)
 		}
 		position.y++;
 	}
-	//	mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, mlx->image.img_ptr, 0, 0);
+		mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, mlx->image.img_ptr, 0, 0);
 	//	control_menu(mlx);
-	//	debug_menu(mlx);
+//		debug_menu(mlx);
 	return (1);
 }
 

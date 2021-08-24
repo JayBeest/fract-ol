@@ -22,9 +22,11 @@ typedef enum
 	W = 13,
 	M = 46,
 	N = 45,
+	P = 35,
 	J = 38,
 	K = 40,
 	L = 37,
+	Z = 6,
 	PLUS = 24,
 	MIN = 27,
 	DOWN = 125,
@@ -103,6 +105,7 @@ typedef struct s_scene
 	t_position				mouse;
 	t_complex				julia;
 	t_bool					julia_animation;
+	t_bool					psycho;
 	t_colours				colours;
 	//debug
 	t_position				grid_position;

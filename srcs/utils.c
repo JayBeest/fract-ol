@@ -34,6 +34,7 @@ void return_to_origin(t_scene *scene)
 {
 	scene->offset.x = 0;
 	scene->offset.y = 0;
+	scene->zoom = scene->default_zoom;
 }
 
 void center_on_mouse(t_position mouse, t_scene *scene)
