@@ -3,14 +3,14 @@
 int mandelbrot(t_scene scene)
 {
 	int			iterations;
-	double 		temp;
+	long double temp;
 	t_complex 	c;
 	t_complex 	z;
 
 	c = scene.complex_position.c;
 	z = scene.complex_position.z;
 	iterations = 0;
-	while (z.re * z.re + z.im * z.im <= 4 && iterations < scene.iteration_amount)
+	while (z.re * z.re + z.im * z.im < 4 && iterations < scene.iteration_amount)
 	{
 		temp = z.re;
 		z.re = z.re * z.re - z.im * z.im + c.re;
@@ -23,7 +23,7 @@ int mandelbrot(t_scene scene)
 int julia(t_scene scene)
 {
 	int			iterations;
-	double 		temp;
+	long double temp;
 	t_complex 	z;
 	t_complex 	c;
 

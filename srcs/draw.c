@@ -40,7 +40,7 @@ unsigned int calculate_fractal(t_scene *scene, t_position pos)
 
 	calculate_complex_position(scene, pos);
 	n = fun_ptr[scene->current_fractal](*scene);
-	return (fetch_colour(n, scene->colours));
+	return (fetch_colour(n, scene->colours, scene->iteration_amount));
 }
 
 void calculate_complex_plane(t_scene *scene)
@@ -86,7 +86,7 @@ int draw_fractal_to_image(t_mlx *mlx)
 int	redraw_image(t_mlx *mlx)
 {
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, mlx->image.img_ptr, 0, 0);
-	control_menu(mlx);
+//	control_menu(mlx);
 	debug_menu(mlx);
 	return (1);
 }

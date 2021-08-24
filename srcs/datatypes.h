@@ -48,8 +48,8 @@ typedef struct
 
 typedef struct
 {
-	double re;
-	double im;
+	long double re;
+	long double im;
 }			t_complex;
 
 typedef struct
@@ -72,15 +72,15 @@ typedef struct
 
 typedef struct
 {
-	double x;
-	double y;
+	long double x;
+	long double y;
 }			t_grid_position;
 
 typedef struct
 {
 	t_complex	min;
 	t_complex	max;
-	double 		step;
+	long double	step;
 }			t_complex_plane_info;
 
 typedef struct
@@ -108,7 +108,8 @@ typedef struct s_scene
 	t_position				grid_position;
 	t_complex_position		complex_position;
 	int						n;
-	double					zoom;
+	long double				zoom;
+	int 					default_zoom;
 }		t_scene;
 
 typedef struct

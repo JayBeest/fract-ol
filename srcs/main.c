@@ -27,8 +27,8 @@ void	init_default_scene(t_scene *scene)
 	scene->colours.colour_mixer_1 = 40;
 	scene->colours.colour_mixer_2 = 5;
 	scene->colours.colour_mixer_3 = 1;
-//	scene->zoom = (scene->res.y >> 1) / 1.2;
-	scene->zoom = 200;
+	scene->default_zoom = scene->res.x / 4;
+	scene->zoom = scene->default_zoom;
 	scene->offset.x = 0;
 	scene->offset.y = 0;
 	scene->mouse.x = -1;

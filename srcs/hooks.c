@@ -16,12 +16,12 @@ int	kill(t_mlx *mlx)
 int mouse_button(int button, int x, int y, t_mlx *mlx)
 {
 	t_position		mouse;
-	t_grid_position	*offset;
 
 	mouse.x = x;
 	mouse.y = y;
-	offset = &mlx->scene.offset;
 	printf("button nr.: %d\n", button);
+	if (mouse.x < 0 || mouse.y < 0 || mouse.x > mlx->scene.res.x || mouse.y > mlx->scene.res.y)
+		return (1);
 	if (button == 1 && mlx->scene.current_fractal == MANDELBROT)
 		center_on_mouse(mouse, &mlx->scene);
 	else if (button == 2)
@@ -42,12 +42,14 @@ int mouse_move(int x, int y, t_mlx *mlx)
 	mouse_pos.y = y;
 	if (mouse_pos.x >= 0 && mouse_pos.y >= 0 && mouse_pos.x <= mlx->scene.res.x && mouse_pos.y <= mlx->scene.res.y)
 	{
-		calculate_complex_position(&mlx->scene, mouse_pos);
-		if (mlx->scene.julia_animation)
-			mlx->scene.julia = mlx->scene.complex_position.c;
 		mlx->scene.mouse.x = x;
 		mlx->scene.mouse.y = y;
-		draw_fractal_to_image(mlx);
+		calculate_complex_position(&mlx->scene, mouse_pos);
+		if (mlx->scene.julia_animation)
+		{
+			mlx->scene.julia = mlx->scene.complex_position.c;
+			draw_fractal_to_image(mlx);
+		}
 	}
 	//	redraw_image(mlx);
 	return (1);
