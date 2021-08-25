@@ -91,3 +91,8 @@ void zoom_in(t_scene *scene, t_position mouse)
 		scene->zoom = scene->zoom / ZOOM_FACTOR;
 	}
 }
+
+void draw_dot(t_mlx *mlx, t_complex_position complex_position, int radius_px)
+{
+
+}

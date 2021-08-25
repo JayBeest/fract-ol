@@ -28,12 +28,11 @@ t_complex_position	position_to_complex_position(t_complex_plane plane, t_positio
 	return (complex_pos);
 }
 
-int	redraw_window(t_mlx *mlx)
+void	redraw_window(t_mlx *mlx)
 {
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, mlx->image.img_ptr, 0, 0);
 	mlx->scene.complex_position = position_to_complex_position(mlx->scene.plane, mlx->scene.mouse);
 	debug_menu(mlx);
-	return (1);
 }
 
 unsigned int calculate_fractal(t_scene *scene, t_position pos)
@@ -43,7 +42,6 @@ unsigned int calculate_fractal(t_scene *scene, t_position pos)
 			[MANDELBROT] = mandelbrot,
 			[JULIA] = julia
 	};
-
 	scene->complex_position = position_to_complex_position(scene->plane, pos);
 	n = fun_ptr[scene->current_fractal](*scene);
 	return (fetch_colour3(n, scene->colours, scene->iteration_amount));
@@ -61,7 +59,7 @@ t_complex_plane calculate_complex_plane(t_scene scene)
 	return (plane);
 }
 
-int draw_fractal_to_image(t_mlx *mlx)
+int	draw_fractal_to_image(t_mlx *mlx)
 {
 	t_position						position;
 	unsigned int					colour;

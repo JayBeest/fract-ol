@@ -56,7 +56,6 @@ void init_mlx_image(t_mlx *mlx, t_scene *scene, t_img_data *image)
 {
 	image->img_ptr = mlx_new_image(mlx->mlx_ptr, scene->res.x, scene->res.y);
 	image->img_address = mlx_get_data_addr(image->img_ptr, &image->bits_per_pixel, &image->line_length, &image->endian);
-
 }
 
 int	main(int argc, char **argv)
