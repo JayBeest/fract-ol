@@ -33,6 +33,7 @@ t_bool_err	parse_examples(int argc, const char **argv, int *arg_i, t_scene *scen
 {
 	static const char	*example[3] = {"Ex1", "Ex2", "Ex3"};
 	int 				i;
+	printf("%d", scene->default_zoom);
 
 	if (argc - 1 == *arg_i)
 		return (t_bool_true_no_err());
@@ -71,7 +72,7 @@ t_bool_err	parse_fractal_args(int argc, const char **argv, int *arg_i, t_scene *
 
 t_bool_err	parse_arguments(int argc, const char **argv, t_scene *scene)
 {
-	static const char	*arguments[2] = {"-Z0", "-Re"};
+//	static const char	*arguments[2] = {"-Z0", "-Re"};
 	int 				i;
 
 	i = 1;

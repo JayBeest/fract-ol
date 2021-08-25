@@ -4,8 +4,8 @@
 
 typedef enum
 {
-	FALSE = 0,
-	TRUE = 1
+	FALSE,
+	TRUE
 }			t_bool;
 
 typedef enum
@@ -15,17 +15,18 @@ typedef enum
 	TOO_MANY_ARGS = 2
 }			t_err_no;
 
-typedef struct
+typedef enum
 {
-	t_bool		bool;
-	t_err_no	error_nr;
-}			t_bool_err;
+	MANDELBROT,
+	JULIA,
+	SHIP
+}			t_fractol_type;
 
 typedef enum
 {
-	MANDELBROT = 0,
-	JULIA = 1
-}			t_fractol_type;
+	MACOS = 0,
+	LINUX = 1
+}			t_arch;
 
 typedef enum
 {
@@ -50,6 +51,12 @@ typedef enum
 	B_SPACE = 51,
 	ESC = 53
 }			t_key;
+
+typedef struct
+{
+	t_bool		bool;
+	t_err_no	error_nr;
+}			t_bool_err;
 
 typedef struct
 {
@@ -132,12 +139,20 @@ typedef struct s_scene
 	int 					default_zoom;
 }		t_scene;
 
+typedef void(*t_action_function)(t_scene*, t_key key, t_position position);
+
 typedef struct
 {
-	void		*mlx_ptr;
-	void		*mlx_window;
-	t_scene		scene;
-	t_img_data	image;
+	t_action_function	action[128];
+}		t_action_list;
+
+typedef struct
+{
+	void					*mlx_ptr;
+	void					*mlx_window;
+	t_scene					scene;
+	t_action_list			action_list;
+	t_img_data				image;
 }		t_mlx;
 
 typedef int(*t_fractal_f_ptr)(t_scene);

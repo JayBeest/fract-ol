@@ -3,20 +3,15 @@
 #include "../mlx/mlx.h"
 #include "main.h"
 #include "datatypes.h"
+#include "../libft/libft.h"
 #include "draw.h"
 #include "hooks.h"
 #include "parser.h"
-
-
+#include "actions.h"
 //void	init_scene(t_scene *scene)
 //{
 //
 //}
-
-void	init_scene(t_scene *scene)
-{
-
-}
 
 void	init_default_scene(t_scene *scene)
 {
@@ -24,26 +19,16 @@ void	init_default_scene(t_scene *scene)
 	scene->res.y = RESOLUTION_Y;
 	scene->current_fractal = MANDELBROT;
 	scene->iteration_amount = DEFAULT_ITERATION;
-//	scene->zoom_to_mouse = FALSE;
-//	scene->colours.colour_mixer_1 = 40;
-//	scene->colours.colour_mixer_2 = 5;
-//	scene->colours.colour_mixer_3 = 1;
 	scene->colours.colour_mixer_1 = 1;
 	scene->colours.colour_mixer_2 = 1;
 	scene->colours.colour_mixer_3 = 1;
 	if (scene->res.x * MANDEL_X_RATIO > scene->res.y * MANDEL_Y_RATIO)
-		scene->default_zoom = scene->res.y / 4;
+		scene->default_zoom = scene->res.y / 3;
 	else
 		scene->default_zoom = scene->res.x / 4;
 	scene->zoom = scene->default_zoom;
-//	scene->offset.x = 0;
-//	scene->offset.y = 0;
 	scene->mouse.x = -1;
 	scene->mouse.y = -1;
-//	scene->julia.re = 0;
-//	scene->julia.im = 0;
-//	scene->julia_animation = FALSE;
-//	scene->psycho = FALSE;
 }
 
 void 	init_mlx(t_mlx *mlx, const t_scene *scene)
@@ -62,8 +47,6 @@ int	main(int argc, char **argv)
 {
 	static t_mlx	mlx;
 	t_bool_err		parse_success;
-
-	printf("sizeof(double) = %lu\nsizeof(long double) = %lu\n", sizeof(double), sizeof(long double));
 
 	init_default_scene(&mlx.scene);
 	parse_success = parse_arguments(argc, (const char**)argv, &mlx.scene);

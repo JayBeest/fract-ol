@@ -3,6 +3,7 @@
 #include "datatypes.h"
 #include "draw.h"
 #include "utils.h"
+#include "actions.h"
 
 #include "main.h"
 #include <stdio.h>
@@ -22,7 +23,7 @@ int mouse_button(int button, int x, int y, t_mlx *mlx)
 	printf("button nr.: %d\n", button);
 	if (mouse.x < 0 || mouse.y < 0 || mouse.x > mlx->scene.res.x || mouse.y > mlx->scene.res.y)
 		return (1);
-	if (button == 1 && mlx->scene.current_fractal == MANDELBROT)
+	if (button == 1)
 		center_on_mouse(mouse, &mlx->scene);
 	else if (button == 2)
 		mlx->scene.mouse = mouse;
@@ -55,40 +56,13 @@ int mouse_move(int x, int y, t_mlx *mlx)
 int	keypress(t_key key_code, t_mlx *mlx)
 {
 	printf("key_code nr.: %d\n", key_code);
-	if (key_code == LEFT)
-		mlx->scene.offset.x -= STEP;
-	else if (key_code == RIGHT)
-		mlx->scene.offset.x += STEP;
-	else if (key_code == DOWN)
-		mlx->scene.offset.y += STEP;
-	else if (key_code == UP)
-		mlx->scene.offset.y -= STEP;
-	else if (key_code == M)
-		switch_bool(&mlx->scene.zoom_to_mouse);
-	else if (key_code == N)
-		switch_bool(&mlx->scene.julia_animation);
-	else if (key_code == P)
-		switch_bool(&mlx->scene.psycho);
-	else if (key_code == J)
-		mlx->scene.colours.colour_mixer_1 += 5;
-	else if (key_code == K)
-		mlx->scene.colours.colour_mixer_2 += 5;
-	else if (key_code == L)
-		mlx->scene.colours.colour_mixer_2++;
-	else if (key_code == Z)
-		mlx->scene.julia = position_to_complex_position(mlx->scene.plane, mlx->scene.mouse);
-	else if (key_code == B_SPACE)
-		return_to_origin(&mlx->scene);
-	else if (key_code == PLUS && mlx->scene.iteration_amount < 1000)
-		mlx->scene.iteration_amount += 10;
-	else if (key_code == MIN && mlx->scene.iteration_amount > 10)
-		mlx->scene.iteration_amount -= 10;
-	else if (key_code == A && mlx->scene.current_fractal < JULIA)
-		mlx->scene.current_fractal++;
-	else if (key_code == D && mlx->scene.current_fractal > MANDELBROT)
-		mlx->scene.current_fractal--;
+	if (key_code == RIGHT || key_code == LEFT || key_code == UP || key_code == DOWN || key_code == A || key_code == D)
+		key_action_controls(&mlx->scene, key_code);
+	else if (key_code == PLUS || key_code == MIN || key_code == B_SPACE || key_code == M || key_code == N || key_code == Z)
+		key_action_settings(&mlx->scene, key_code);
+	else if (key_code == J || key_code == K || key_code == L || key_code == W || key_code == S || key_code == P)
+		key_action_colours(&mlx->scene, key_code);
 	else if (key_code == ESC)
 		kill(mlx);
-//	draw_fractal_to_image(mlx);
 	return (1);
 }

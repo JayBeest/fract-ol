@@ -7,13 +7,27 @@
 
 #include "stdio.h"
 
-void    put_pixel(t_img_data *image, t_position position, unsigned int colour)
+//void    put_pixel(t_img_data *image, t_position position, unsigned int colour)
+//{
+//	char	*pixel_address;
+//	int		offset;
+//
+//	offset = position.y * image->line_length + position.x * (image->bits_per_pixel / 8);
+//	pixel_address = image->img_address + offset;
+//	*(unsigned int *)pixel_address = colour;
+//}
+
+void    put_pixel(t_mlx *mlx, t_position position, unsigned int colour)
 {
 	char	*pixel_address;
 	int		offset;
+	int 	axis;
 
-	offset = position.y * image->line_length + position.x * (image->bits_per_pixel / 8);
-	pixel_address = image->img_address + offset;
+	axis = RESOLUTION_Y >> 1;
+	if (mlx->scene.current_fractal == SHIP)
+			position.y = RESOLUTION_Y - position.y;
+	offset = position.y * mlx->image.line_length + position.x * (mlx->image.bits_per_pixel / 8);
+	pixel_address = mlx->image.img_address + offset;
 	*(unsigned int *)pixel_address = colour;
 }
 
@@ -40,7 +54,8 @@ unsigned int calculate_fractal(t_scene *scene, t_position pos)
 	int 					n;
 	const t_fractal_f_ptr	fun_ptr[3] = {
 			[MANDELBROT] = mandelbrot,
-			[JULIA] = julia
+			[JULIA] = julia,
+			[SHIP] = burning_ship
 	};
 	scene->complex_position = position_to_complex_position(scene->plane, pos);
 	n = fun_ptr[scene->current_fractal](*scene);
@@ -74,7 +89,7 @@ int	draw_fractal_to_image(t_mlx *mlx)
 		while (position.x < mlx->scene.res.x)
 		{
 			colour = calculate_fractal(&mlx->scene, position);
-			put_pixel(&mlx->image, position, colour);
+			put_pixel(mlx, position, colour);
 			position.x++;
 		}
 		position.y++;
