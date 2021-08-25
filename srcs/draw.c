@@ -28,6 +28,14 @@ t_complex_position	position_to_complex_position(t_complex_plane plane, t_positio
 	return (complex_pos);
 }
 
+int	redraw_window(t_mlx *mlx)
+{
+	mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, mlx->image.img_ptr, 0, 0);
+	mlx->scene.complex_position = position_to_complex_position(mlx->scene.plane, mlx->scene.mouse);
+	debug_menu(mlx);
+	return (1);
+}
+
 unsigned int calculate_fractal(t_scene *scene, t_position pos)
 {
 	int 					n;
@@ -41,18 +49,16 @@ unsigned int calculate_fractal(t_scene *scene, t_position pos)
 	return (fetch_colour3(n, scene->colours, scene->iteration_amount));
 }
 
-void calculate_complex_plane(t_scene *scene)
+t_complex_plane calculate_complex_plane(t_scene scene)
 {
-	t_complex	*min_pos;
-	t_complex	*max_pos;
+	t_complex_plane	plane;
 
-	min_pos = &scene->plane.min;
-	max_pos = &scene->plane.max;
-	min_pos->re = (scene->offset.x - RESOLUTION_X / 2) / scene->zoom;
-	max_pos->re = min_pos->re + RESOLUTION_X / scene->zoom;
-	scene->plane.step = (max_pos->re - min_pos->re) / RESOLUTION_X;
-	min_pos->im = (scene->offset.y - RESOLUTION_Y / 2) / scene->zoom;
-	max_pos->im = min_pos->im + RESOLUTION_Y / scene->zoom;
+	plane.min.re = (scene.offset.x - RESOLUTION_X / 2) / scene.zoom;
+	plane.max.re = plane.min.re + RESOLUTION_X / scene.zoom;
+	plane.step = (plane.max.re - plane.min.re) / RESOLUTION_X;
+	plane.min.im = (scene.offset.y - RESOLUTION_Y / 2) / scene.zoom;
+	plane.max.im = plane.min.im + RESOLUTION_Y / scene.zoom;
+	return (plane);
 }
 
 int draw_fractal_to_image(t_mlx *mlx)
@@ -60,7 +66,7 @@ int draw_fractal_to_image(t_mlx *mlx)
 	t_position						position;
 	unsigned int					colour;
 
-	calculate_complex_plane(&mlx->scene);
+	mlx->scene.plane = calculate_complex_plane(mlx->scene);
 	position.y = 0;
 	if (mlx->scene.psycho)
 		mlx->scene.colours.colour_mixer_3++;
@@ -75,17 +81,8 @@ int draw_fractal_to_image(t_mlx *mlx)
 		}
 		position.y++;
 	}
-		mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, mlx->image.img_ptr, 0, 0);
-	//	control_menu(mlx);
-//		debug_menu(mlx);
+	redraw_window(mlx);
 	return (1);
 }
 
-int	redraw_image(t_mlx *mlx)
-{
-	mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, mlx->image.img_ptr, 0, 0);
-//	control_menu(mlx);
-	debug_menu(mlx);
-	return (1);
-}
 

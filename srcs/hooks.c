@@ -47,9 +47,7 @@ int mouse_move(int x, int y, t_mlx *mlx)
 		if (mlx->scene.julia_animation)
 		{
 			mlx->scene.julia.c = mlx->scene.complex_position.c;
-			draw_fractal_to_image(mlx);
 		}
-		redraw_image(mlx);
 	}
 	return (1);
 }
@@ -91,6 +89,6 @@ int	keypress(t_key key_code, t_mlx *mlx)
 		mlx->scene.current_fractal--;
 	else if (key_code == ESC)
 		kill(mlx);
-	draw_fractal_to_image(mlx);
+//	draw_fractal_to_image(mlx);
 	return (1);
 }

@@ -85,7 +85,7 @@ int	main(int argc, char **argv)
 	mlx_hook(mlx.mlx_window, MotionNotify, PointerMotionMask, mouse_move, &mlx);
 
 	mlx_loop_hook(mlx.mlx_ptr,draw_fractal_to_image, &mlx);
-//	mlx_loop_hook(mlx.mlx_ptr,redraw_image, &mlx);
+//	mlx_loop_hook(mlx.mlx_ptr,redraw_window, &mlx);
 	mlx_loop(mlx.mlx_ptr);
 	return (0);
 }
