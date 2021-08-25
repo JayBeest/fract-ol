@@ -22,7 +22,7 @@ t_complex_position	position_to_complex_position(t_complex_plane plane, t_positio
 	t_complex_position		complex_pos;
 
 	complex_pos.c.re = pos.x * plane.step + plane.min.re;
-	complex_pos.c.im = pos.y * plane.step + plane.min.im;
+	complex_pos.c.im = pos.y * -plane.step + plane.min.im;
 	complex_pos.z.re = 0;
 	complex_pos.z.im = 0;
 	return (complex_pos);
@@ -54,8 +54,8 @@ t_complex_plane calculate_complex_plane(t_scene scene)
 	plane.min.re = (scene.offset.x - RESOLUTION_X / 2) / scene.zoom;
 	plane.max.re = plane.min.re + RESOLUTION_X / scene.zoom;
 	plane.step = (plane.max.re - plane.min.re) / RESOLUTION_X;
-	plane.min.im = (scene.offset.y - RESOLUTION_Y / 2) / scene.zoom;
-	plane.max.im = plane.min.im + RESOLUTION_Y / scene.zoom;
+	plane.min.im = -(scene.offset.y - RESOLUTION_Y / 2) / scene.zoom;
+	plane.max.im = plane.min.im - RESOLUTION_Y / scene.zoom;
 	return (plane);
 }
 
