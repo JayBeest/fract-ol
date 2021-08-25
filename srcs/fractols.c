@@ -28,7 +28,7 @@ int julia(t_scene scene)
 	t_complex 	c;
 
 	z = scene.complex_position.c;
-	c = scene.julia;
+	c = scene.julia.c;
 	iterations = 0;
 	while (z.re * z.re + z.im * z.im <= 4 && iterations < scene.iteration_amount)
 	{

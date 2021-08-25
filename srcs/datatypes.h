@@ -30,6 +30,7 @@ typedef enum
 typedef enum
 {
 	A = 0,
+	C = 8,
 	D = 2,
 	S = 1,
 	W = 13,
@@ -44,6 +45,9 @@ typedef enum
 	MIN = 27,
 	DOWN = 125,
 	UP = 126,
+	LEFT = 123,
+	RIGHT = 124,
+	B_SPACE = 51,
 	ESC = 53
 }			t_key;
 
@@ -96,7 +100,7 @@ typedef struct
 	t_complex	min;
 	t_complex	max;
 	long double	step;
-}			t_complex_plane_info;
+}			t_complex_plane;
 
 typedef struct
 {
@@ -113,10 +117,10 @@ typedef struct s_scene
 	t_fractol_type			current_fractal;
 	int 					iteration_amount;
 	t_bool					zoom_to_mouse;
-	t_complex_plane_info	plane;
+	t_complex_plane			plane;
 	t_grid_position			offset;
 	t_position				mouse;
-	t_complex				julia;
+	t_complex_position		julia;
 	t_bool					julia_animation;
 	t_bool					psycho;
 	t_colours				colours;

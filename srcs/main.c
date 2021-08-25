@@ -31,7 +31,10 @@ void	init_default_scene(t_scene *scene)
 	scene->colours.colour_mixer_1 = 1;
 	scene->colours.colour_mixer_2 = 1;
 	scene->colours.colour_mixer_3 = 1;
-	scene->default_zoom = scene->res.x / 4;
+	if (scene->res.x * MANDEL_X_RATIO > scene->res.y * MANDEL_Y_RATIO)
+		scene->default_zoom = scene->res.y / 4;
+	else
+		scene->default_zoom = scene->res.x / 4;
 	scene->zoom = scene->default_zoom;
 //	scene->offset.x = 0;
 //	scene->offset.y = 0;

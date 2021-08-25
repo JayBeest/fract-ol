@@ -17,17 +17,15 @@ void    put_pixel(t_img_data *image, t_position position, unsigned int colour)
 	*(unsigned int *)pixel_address = colour;
 }
 
-void	calculate_complex_position(t_scene *scene, t_position pos)
+t_complex_position	position_to_complex_position(t_complex_plane plane, t_position pos)
 {
-	t_complex_position		*complex_pos;
-	t_complex_plane_info	plane;
+	t_complex_position		complex_pos;
 
-	plane = scene->plane;
-	complex_pos = &scene->complex_position;
-	complex_pos->c.re = pos.x * plane.step + scene->plane.min.re;
-	complex_pos->c.im = pos.y * plane.step + scene->plane.min.im;
-	complex_pos->z.re = 0;
-	complex_pos->z.im = 0;
+	complex_pos.c.re = pos.x * plane.step + plane.min.re;
+	complex_pos.c.im = pos.y * plane.step + plane.min.im;
+	complex_pos.z.re = 0;
+	complex_pos.z.im = 0;
+	return (complex_pos);
 }
 
 unsigned int calculate_fractal(t_scene *scene, t_position pos)
@@ -38,7 +36,7 @@ unsigned int calculate_fractal(t_scene *scene, t_position pos)
 			[JULIA] = julia
 	};
 
-	calculate_complex_position(scene, pos);
+	scene->complex_position = position_to_complex_position(scene->plane, pos);
 	n = fun_ptr[scene->current_fractal](*scene);
 	return (fetch_colour3(n, scene->colours, scene->iteration_amount));
 }
@@ -47,11 +45,9 @@ void calculate_complex_plane(t_scene *scene)
 {
 	t_complex	*min_pos;
 	t_complex	*max_pos;
-//	t_complex	*offset;
 
 	min_pos = &scene->plane.min;
 	max_pos = &scene->plane.max;
-//	offset = &scene->plane.offset;
 	min_pos->re = (scene->offset.x - RESOLUTION_X / 2) / scene->zoom;
 	max_pos->re = min_pos->re + RESOLUTION_X / scene->zoom;
 	scene->plane.step = (max_pos->re - min_pos->re) / RESOLUTION_X;
