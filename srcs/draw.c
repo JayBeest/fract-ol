@@ -7,21 +7,20 @@
 
 #include "stdio.h"
 
-void    put_pixel(t_mlx *mlx, t_position position, unsigned int colour)
+void	put_pixel(t_mlx *mlx, t_position position, unsigned int colour)
 {
 	char	*pixel_address;
 	int		offset;
-	int 	axis;
 
-	axis = RESOLUTION_Y >> 1;
 	if (mlx->scene.current_fractal == SHIP)
-			position.y = RESOLUTION_Y - position.y;
-	offset = position.y * mlx->image.line_length + position.x * (mlx->image.bits_per_pixel / 8);
+		position.y = RESOLUTION_Y - position.y;
+	offset = position.y * mlx->image.line_length + position.x * \
+		(mlx->image.bits_per_pixel / 8);
 	pixel_address = mlx->image.img_address + offset;
 	*(unsigned int *)pixel_address = colour;
 }
 
-t_complex_position	position_to_complex_position(t_complex_plane plane, t_position pos)
+t_complex_position	pos_to_complex_pos(t_complex_plane plane, t_position pos)
 {
 	t_complex_position		complex_pos;
 
@@ -34,25 +33,30 @@ t_complex_position	position_to_complex_position(t_complex_plane plane, t_positio
 
 void	redraw_window(t_mlx *mlx)
 {
-	mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, mlx->image.img_ptr, 0, 0);
-	mlx->scene.complex_position = position_to_complex_position(mlx->scene.plane, mlx->scene.mouse);
-	debug_menu(mlx);
+	mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, \
+		mlx->image.img_ptr, 0, 0);
+	mlx->scene.complex_position = pos_to_complex_pos(mlx->scene.plane, \
+		mlx->scene.mouse);
+//	debug_menu(mlx);
+	if (mlx->scene.control_menu)
+		control_menu(mlx);
 }
 
-unsigned int calculate_fractal(t_scene *scene, t_position pos)
+unsigned int	calculate_fractal(t_scene *scene, t_position pos)
 {
-	int 					n;
+	int						n;
 	const t_fractal_f_ptr	fun_ptr[3] = {
 			[MANDELBROT] = mandelbrot,
 			[JULIA] = julia,
 			[SHIP] = burning_ship
 	};
-	scene->complex_position = position_to_complex_position(scene->plane, pos);
+
+	scene->complex_position = pos_to_complex_pos(scene->plane, pos);
 	n = fun_ptr[scene->current_fractal](*scene);
 	return (fetch_colour3(n, scene->colours, scene->iteration_amount));
 }
 
-t_complex_plane calculate_complex_plane(t_scene scene)
+t_complex_plane	calculate_complex_plane(t_scene scene)
 {
 	t_complex_plane	plane;
 
@@ -87,5 +91,3 @@ int	draw_fractal_to_image(t_mlx *mlx)
 	redraw_window(mlx);
 	return (1);
 }
-
-

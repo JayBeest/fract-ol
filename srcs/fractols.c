@@ -1,17 +1,18 @@
 #include "datatypes.h"
 #include <math.h>
 
-int mandelbrot(t_scene scene)
+int	mandelbrot(t_scene scene)
 {
 	int			iterations;
-	long double temp;
-	t_complex 	c;
-	t_complex 	z;
+	long double	temp;
+	t_complex	c;
+	t_complex	z;
 
 	c = scene.complex_position.c;
 	z = scene.complex_position.z;
 	iterations = 0;
-	while (z.re * z.re + z.im * z.im <= 4 && iterations < scene.iteration_amount)
+	while (z.re * z.re + z.im * z.im <= 4 && \
+		iterations < scene.iteration_amount)
 	{
 		temp = z.re;
 		z.re = z.re * z.re - z.im * z.im + c.re;
@@ -21,17 +22,18 @@ int mandelbrot(t_scene scene)
 	return (iterations);
 }
 
-int julia(t_scene scene)
+int	julia(t_scene scene)
 {
 	int			iterations;
-	long double temp;
-	t_complex 	z;
-	t_complex 	c;
+	long double	temp;
+	t_complex	z;
+	t_complex	c;
 
 	z = scene.complex_position.c;
 	c = scene.julia.c;
 	iterations = 0;
-	while (z.re * z.re + z.im * z.im <= 4 && iterations < scene.iteration_amount)
+	while (z.re * z.re + z.im * z.im <= 4 && \
+		iterations < scene.iteration_amount)
 	{
 		temp = z.re;
 		z.re = z.re * z.re - z.im * z.im + c.re;
@@ -41,17 +43,18 @@ int julia(t_scene scene)
 	return (iterations);
 }
 
-int burning_ship(t_scene scene)
+int	burning_ship(t_scene scene)
 {
 	int			iterations;
-	long double temp;
-	t_complex 	c;
-	t_complex 	z;
+	long double	temp;
+	t_complex	c;
+	t_complex	z;
 
 	c = scene.complex_position.c;
 	z = scene.complex_position.z;
 	iterations = 0;
-	while (z.re * z.re + z.im * z.im <= 4 && iterations < scene.iteration_amount)
+	while (z.re * z.re + z.im * z.im <= 4 && \
+		iterations < scene.iteration_amount)
 	{
 		temp = z.re;
 		z.re = z.re * z.re - z.im * z.im + c.re;

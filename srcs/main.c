@@ -19,7 +19,7 @@ void	init_default_scene(t_scene *scene)
 	scene->res.y = RESOLUTION_Y;
 	scene->current_fractal = MANDELBROT;
 	scene->setting = DEFAULT;
-	scene->iteration_amount = DEFAULT_ITERATION;
+	scene->iteration_amount = DEFAULT_ITERATIONS;
 	scene->colours.colour_mixer_1 = 1;
 	scene->colours.colour_mixer_2 = 1;
 	scene->colours.colour_mixer_3 = 1;
@@ -30,18 +30,40 @@ void	init_default_scene(t_scene *scene)
 	scene->zoom = scene->default_zoom;
 	scene->mouse.x = -1;
 	scene->mouse.y = -1;
+	scene->control_menu = TRUE;
 }
 
-void 	init_mlx(t_mlx *mlx, const t_scene *scene)
+void	init_mlx(t_mlx *mlx, const t_scene *scene)
 {
 	mlx->mlx_ptr = mlx_init();
-	mlx->mlx_window = mlx_new_window(mlx->mlx_ptr, scene->res.x, scene->res.y, PROJECT);
+	mlx->mlx_window = mlx_new_window(mlx->mlx_ptr, scene->res.x, \
+		scene->res.y, PROJECT);
 }
 
-void init_mlx_image(t_mlx *mlx, t_scene *scene, t_img_data *image)
+void	init_mlx_image(t_mlx *mlx, t_scene *scene, t_img_data *image)
 {
 	image->img_ptr = mlx_new_image(mlx->mlx_ptr, scene->res.x, scene->res.y);
-	image->img_address = mlx_get_data_addr(image->img_ptr, &image->bits_per_pixel, &image->line_length, &image->endian);
+	image->img_address = mlx_get_data_addr(image->img_ptr, \
+		&image->bits_per_pixel, &image->line_length, &image->endian);
+}
+
+void	setup_julia(t_scene *scene)
+{
+	if (scene->setting == 0)
+	{
+		scene->julia.c.re = -0.831660;
+		scene->julia.c.im = -0.206859;
+	}
+	else if (scene->setting == 1)
+	{
+		scene->julia.c.re = 0.025000;
+		scene->julia.c.im = 0.660000;
+	}
+	else if (scene->setting == 2)
+	{
+		scene->julia.c.re = 0.380000;
+		scene->julia.c.im = -0.120000;
+	}
 }
 
 int	main(int argc, char **argv)
@@ -50,7 +72,7 @@ int	main(int argc, char **argv)
 	t_bool_err		parse_success;
 
 	init_default_scene(&mlx.scene);
-	parse_success = parse_arguments(argc, (const char**)argv, &mlx.scene);
+	parse_success = parse_arguments(argc, (const char **)argv, &mlx.scene);
 	if (parse_success.bool)
 		printf("\nParse SUCCESS!!\n");
 	else
@@ -58,6 +80,7 @@ int	main(int argc, char **argv)
 		printf("error no: %d\n", parse_success.error_nr);
 		return (1);
 	}
+	setup_julia(&mlx.scene);
 	init_mlx(&mlx, &mlx.scene);
 	init_mlx_image(&mlx, &mlx.scene, &mlx.image);
 	draw_fractal_to_image(&mlx);
@@ -66,10 +89,8 @@ int	main(int argc, char **argv)
 	mlx_hook(mlx.mlx_window, DestroyNotify, StructureNotifyMask, kill, &mlx);
 	mlx_hook(mlx.mlx_window, ButtonPress, ButtonPressMask, mouse_button, &mlx);
 	mlx_hook(mlx.mlx_window, MotionNotify, PointerMotionMask, mouse_move, &mlx);
-
-	mlx_loop_hook(mlx.mlx_ptr,draw_fractal_to_image, &mlx);
+	mlx_loop_hook(mlx.mlx_ptr, draw_fractal_to_image, &mlx);
 //	mlx_loop_hook(mlx.mlx_ptr,redraw_window, &mlx);
 	mlx_loop(mlx.mlx_ptr);
 	return (0);
 }
-

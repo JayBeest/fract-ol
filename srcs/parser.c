@@ -4,7 +4,7 @@
 
 #define SAME 0
 
-t_bool_err	t_bool_true_no_err()
+t_bool_err	t_bool_true_no_err(void)
 {
 	t_bool_err	true_bool_no_error;
 
@@ -22,17 +22,17 @@ t_bool_err	t_bool_false_err(t_err_no error_no)
 	return (false_bool_error_no);
 }
 
-t_bool_err parse_no_args()
+t_bool_err	parse_no_args(void)
 {
-	printf("Usage: fractal [-R <resolution>] [-C <complex_plane_pos>] [<fractal");
-	printf("_type>] [<args>]\n");
+	printf("Usage: fractal [<fractal_type>] [<example>]\n");
+	printf("");
 	return (t_bool_true_no_err());
 }
 
 t_bool_err	parse_flag(int argc, const char **argv, t_scene *scene)
 {
 	static const char	*examples[3] = {"Ex1", "Ex2", "Ex3"};
-	int 				i;
+	int					i;
 
 	i = 0;
 	while (i < 3 && argc == 3)
@@ -50,8 +50,8 @@ t_bool_err	parse_flag(int argc, const char **argv, t_scene *scene)
 t_bool_err	parse_arguments(int argc, const char **argv, t_scene *scene)
 {
 	static const char	*fractal_type[3] = {"Mandelbrot", "Julia", "Ship"};
-	unsigned int 		arg_len;
-	int 				i;
+	unsigned int		arg_len;
+	int					i;
 
 	if (argc == 1)
 		return (parse_no_args());
@@ -59,7 +59,8 @@ t_bool_err	parse_arguments(int argc, const char **argv, t_scene *scene)
 	i = 0;
 	while (i < 3)
 	{
-		if (ft_strlen(fractal_type[i]) == arg_len && ft_strncmp(fractal_type[i], argv[1], arg_len) == SAME)
+		if (ft_strlen(fractal_type[i]) == arg_len && \
+			ft_strncmp(fractal_type[i], argv[1], arg_len) == SAME)
 		{
 			scene->current_fractal = i;
 			return (parse_flag(argc, argv + 2, scene));

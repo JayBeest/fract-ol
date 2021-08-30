@@ -27,7 +27,7 @@ typedef enum
 	EX1,
 	EX2,
 	EX3,
-	DEFAULT
+	DEFAULT = 0
 }			t_setting;
 
 typedef enum
@@ -50,6 +50,7 @@ typedef enum
 	K = 40,
 	L = 37,
 	Z = 6,
+	F1 = 122,
 	PLUS = 24,
 	MIN = 27,
 	DOWN = 125,
@@ -72,12 +73,6 @@ typedef struct
 	unsigned char	g;
 	unsigned char	b;
 }			t_rgb;
-
-typedef struct
-{
-	int		iterations;
-	t_rgb	colour;
-}			t_;
 
 typedef struct
 {
@@ -143,11 +138,11 @@ typedef struct s_scene
 	t_position				mouse;
 	t_complex_position		julia;
 	t_bool					julia_animation;
+	t_bool 					control_menu;
 	t_bool					psycho;
 	t_colours				colours;
 	t_setting				setting;
-	//debug
-	t_position				grid_position;
+
 	t_complex_position		complex_position;
 	int						n;
 	long double				zoom;
