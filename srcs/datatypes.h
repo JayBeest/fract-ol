@@ -165,7 +165,7 @@ typedef struct
 {
 	void					*mlx_ptr;
 	void					*mlx_window;
-	t_pixel					**pixels;
+//	t_pixel					**pixels;
 	t_scene					scene;
 	t_action_list			action_list;
 	t_img_data				image;

@@ -8,6 +8,6 @@
 # define DEFAULT_ITERATION 50
 # define MANDEL_X_RATIO	4
 # define MANDEL_Y_RATIO	7
-# include <X11/Xlib.h>
+# include "X_custom.h"
 
 #endif
