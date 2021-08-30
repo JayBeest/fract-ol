@@ -18,6 +18,7 @@ void	init_default_scene(t_scene *scene)
 	scene->res.x = RESOLUTION_X;
 	scene->res.y = RESOLUTION_Y;
 	scene->current_fractal = MANDELBROT;
+	scene->setting = DEFAULT;
 	scene->iteration_amount = DEFAULT_ITERATION;
 	scene->colours.colour_mixer_1 = 1;
 	scene->colours.colour_mixer_2 = 1;

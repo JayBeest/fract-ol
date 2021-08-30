@@ -11,7 +11,7 @@ typedef enum
 typedef enum
 {
 	NO_ERROR = 0,
-	NOT_FRACTAL_TYPE = 1,
+	NO_VALID_TYPE = 1,
 	TOO_MANY_ARGS = 2
 }			t_err_no;
 
@@ -21,6 +21,14 @@ typedef enum
 	JULIA,
 	SHIP
 }			t_fractol_type;
+
+typedef enum
+{
+	EX1,
+	EX2,
+	EX3,
+	DEFAULT
+}			t_setting;
 
 typedef enum
 {
@@ -64,6 +72,12 @@ typedef struct
 	unsigned char	g;
 	unsigned char	b;
 }			t_rgb;
+
+typedef struct
+{
+	int		iterations;
+	t_rgb	colour;
+}			t_;
 
 typedef struct
 {
@@ -131,6 +145,7 @@ typedef struct s_scene
 	t_bool					julia_animation;
 	t_bool					psycho;
 	t_colours				colours;
+	t_setting				setting;
 	//debug
 	t_position				grid_position;
 	t_complex_position		complex_position;
@@ -150,6 +165,7 @@ typedef struct
 {
 	void					*mlx_ptr;
 	void					*mlx_window;
+	t_pixel					**pixels;
 	t_scene					scene;
 	t_action_list			action_list;
 	t_img_data				image;

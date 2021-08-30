@@ -1,6 +1,7 @@
 #ifndef PARSER_H
 #define PARSER_H
 
+t_bool_err	parse_fractal_type(int argc, const char **argv, int *arg_i, t_scene *scene);
 t_bool_err	parse_fractal_args(int argc, const char **argv, int *arg_i, t_scene *scene);
 t_bool_err	parse_arguments(int argc, const char **argv, t_scene *scene);
 t_bool_err	parse_examples(int argc, const char **argv, int *arg_i, t_scene *scene);

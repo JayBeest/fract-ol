@@ -55,7 +55,10 @@ int burning_ship(t_scene scene)
 	{
 		temp = z.re;
 		z.re = z.re * z.re - z.im * z.im + c.re;
-		z.im = 1 * (fabs(2 * temp * z.im) + c.im);
+		z.im = 2 * temp * z.im;
+		if (z.im < 0)
+			z.im = -z.im;
+		z.im += c.im;
 		iterations++;
 	}
 	return (iterations);

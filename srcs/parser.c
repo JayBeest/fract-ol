@@ -29,61 +29,42 @@ t_bool_err parse_no_args()
 	return (t_bool_true_no_err());
 }
 
-t_bool_err	parse_examples(int argc, const char **argv, int *arg_i, t_scene *scene)
+t_bool_err	parse_flag(int argc, const char **argv, t_scene *scene)
 {
-	static const char	*example[3] = {"Ex1", "Ex2", "Ex3"};
+	static const char	*examples[3] = {"Ex1", "Ex2", "Ex3"};
 	int 				i;
-	printf("%d", scene->default_zoom);
 
-	if (argc - 1 == *arg_i)
-		return (t_bool_true_no_err());
 	i = 0;
-	while (i < 3)
+	while (i < 3 && argc == 3)
 	{
-		if (ft_strlen(argv[*arg_i]) == 3 && ft_strncmp(example[i], argv[*arg_i], 3) == SAME)
+		if (ft_strlen(*argv) == 3 && ft_strncmp(examples[i], *argv, 3) == SAME)
 		{
-			printf("<<<< Load %s!!!\n", example[i]);
-			return (t_bool_true_no_err());
+			scene->setting = i;
+			printf("example: %s\n", examples[i]);
 		}
 		i++;
 	}
-	return (t_bool_false_err(NOT_FRACTAL_TYPE));
-}
-
-t_bool_err	parse_fractal_args(int argc, const char **argv, int *arg_i, t_scene *scene)
-{
-	static const char	*fractal_type[2] = {"Mandelbrot", "Julia"};
-	unsigned int 		arg_len;
-	int 				i;
-
-	arg_len = ft_strlen(argv[1]);
-	i = 0;
-	while (i < 2)
-	{
-		if (ft_strlen(fractal_type[i]) == arg_len && ft_strncmp(fractal_type[i], argv[*arg_i], arg_len) == SAME)
-		{
-			scene->current_fractal = i;
-			return (parse_examples(argc, argv, arg_i, scene));
-		}
-		i++;
-	}
-	return (t_bool_false_err(NOT_FRACTAL_TYPE));
+	return (t_bool_true_no_err());
 }
 
 t_bool_err	parse_arguments(int argc, const char **argv, t_scene *scene)
 {
-//	static const char	*arguments[2] = {"-Z0", "-Re"};
+	static const char	*fractal_type[3] = {"Mandelbrot", "Julia", "Ship"};
+	unsigned int 		arg_len;
 	int 				i;
 
-	i = 1;
 	if (argc == 1)
-	{
 		return (parse_no_args());
+	arg_len = ft_strlen(argv[1]);
+	i = 0;
+	while (i < 3)
+	{
+		if (ft_strlen(fractal_type[i]) == arg_len && ft_strncmp(fractal_type[i], argv[1], arg_len) == SAME)
+		{
+			scene->current_fractal = i;
+			return (parse_flag(argc, argv + 2, scene));
+		}
+		i++;
 	}
-	else if (argc == 2 || argc == 3)
-		return (parse_fractal_args(argc, argv, &i, scene));
-//	else if (argc < 9)
-//		parse_success = parse_flags(argc, argv, i, scene);
-
-	return (t_bool_false_err(TOO_MANY_ARGS));
+	return (t_bool_false_err(NO_VALID_TYPE));
 }

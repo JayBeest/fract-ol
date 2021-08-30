@@ -7,16 +7,6 @@
 
 #include "stdio.h"
 
-//void    put_pixel(t_img_data *image, t_position position, unsigned int colour)
-//{
-//	char	*pixel_address;
-//	int		offset;
-//
-//	offset = position.y * image->line_length + position.x * (image->bits_per_pixel / 8);
-//	pixel_address = image->img_address + offset;
-//	*(unsigned int *)pixel_address = colour;
-//}
-
 void    put_pixel(t_mlx *mlx, t_position position, unsigned int colour)
 {
 	char	*pixel_address;
