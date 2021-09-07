@@ -1,11 +1,10 @@
 #include "datatypes.h"
 #include "../mlx/mlx.h"
 #include "main.h"
-#include "utils.h"
+#include "colour.h"
 #include "fractols.h"
 #include "menu.h"
-
-#include "stdio.h"
+#include "utils.h"
 
 void	put_pixel(t_mlx *mlx, t_position position, unsigned int colour)
 {
@@ -20,24 +19,12 @@ void	put_pixel(t_mlx *mlx, t_position position, unsigned int colour)
 	*(unsigned int *)pixel_address = colour;
 }
 
-t_complex_position	pos_to_complex_pos(t_complex_plane plane, t_position pos)
-{
-	t_complex_position		complex_pos;
-
-	complex_pos.c.re = pos.x * plane.step + plane.min.re;
-	complex_pos.c.im = -pos.y * plane.step + plane.min.im;
-	complex_pos.z.re = 0;
-	complex_pos.z.im = 0;
-	return (complex_pos);
-}
-
 void	redraw_window(t_mlx *mlx)
 {
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, \
 		mlx->image.img_ptr, 0, 0);
 	mlx->scene.complex_position = pos_to_complex_pos(mlx->scene.plane, \
 		mlx->scene.mouse);
-//	debug_menu(mlx);
 	if (mlx->scene.control_menu)
 		control_menu(mlx);
 }
@@ -54,18 +41,6 @@ unsigned int	calculate_fractal(t_scene *scene, t_position pos)
 	scene->complex_position = pos_to_complex_pos(scene->plane, pos);
 	n = fun_ptr[scene->current_fractal](*scene);
 	return (fetch_colour3(n, scene->colours, scene->iteration_amount));
-}
-
-t_complex_plane	calculate_complex_plane(t_scene scene)
-{
-	t_complex_plane	plane;
-
-	plane.min.re = (scene.offset.x - RESOLUTION_X / 2) / scene.zoom;
-	plane.max.re = plane.min.re + RESOLUTION_X / scene.zoom;
-	plane.step = (plane.max.re - plane.min.re) / RESOLUTION_X;
-	plane.min.im = -(scene.offset.y - RESOLUTION_Y / 2) / scene.zoom;
-	plane.max.im = plane.min.im - RESOLUTION_Y / scene.zoom;
-	return (plane);
 }
 
 int	draw_fractal_to_image(t_mlx *mlx)

@@ -1,13 +1,10 @@
 #ifndef UTILS_H
 # define UTILS_H
 
-unsigned int	fetch_colour(int n, t_colours colour, int max_iterations);
-unsigned int	fetch_colour2(int n, t_colours colour, int max_iterations);
-unsigned int	fetch_colour3(int n, t_colours colour, int max_iterations);
-void return_to_origin(t_scene *scene);
-void center_on_mouse(t_position mouse, t_scene *scene);
-void zoom_in(t_scene *scene, t_position mouse);
-void zoom_out(t_scene *scene, t_position mouse);
-void switch_bool(t_bool *bool);
+void				return_to_origin(t_scene *scene);
+void				center_on_mouse(t_position mouse, t_scene *scene);
+void				switch_bool(t_bool *bool);
+t_complex_position	pos_to_complex_pos(t_complex_plane plane, t_position pos);
+t_complex_plane		calculate_complex_plane(t_scene scene);
 
 #endif

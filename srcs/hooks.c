@@ -1,11 +1,10 @@
 #include <stdlib.h>
 #include "../mlx/mlx.h"
 #include "datatypes.h"
+#include "hooks.h"
 #include "draw.h"
 #include "utils.h"
 #include "actions.h"
-
-#include "main.h"
 #include <stdio.h>
 
 int	kill(t_mlx *mlx)
@@ -71,4 +70,17 @@ int	keypress(t_key key_code, t_mlx *mlx)
 	else if (key_code == ESC)
 		kill(mlx);
 	return (1);
+}
+
+void	hook_to_mlx(t_mlx *mlx)
+{
+	mlx_hook(mlx->mlx_window, KEY_RELEASE, \
+		  	KEY_RELEASE_MASK, keypress, mlx);
+	mlx_hook(mlx->mlx_window, DESTROY_NOTIFY, \
+		  	STRUCTURE_NOTIFY_MASK, kill, mlx);
+	mlx_hook(mlx->mlx_window, BUTTON_PRESS, \
+		BUTTON_PRESS_MASK, mouse_button, mlx);
+	mlx_hook(mlx->mlx_window, MOTION_NOTIFY, \
+		POINTER_MOTION_MASK, mouse_move, mlx);
+	mlx_loop_hook(mlx->mlx_ptr, draw_fractal_to_image, mlx);
 }

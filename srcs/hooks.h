@@ -1,10 +1,20 @@
 #ifndef HOOKS_H
-#define HOOKS_H
+# define HOOKS_H
 
-int	kill(t_mlx *mlx);
-int mouse_button(int button, int x, int y, t_mlx *mlx);
-int mouse_move(int x, int y, t_mlx *mlx);
-int	keypress(t_key key_code, t_mlx *mlx);
+# define KEY_RELEASE_MASK (1L<<1)
+# define BUTTON_PRESS_MASK (1L<<2)
+# define POINTER_MOTION_MASK (1L<<6)
+# define STRUCTURE_NOTIFY_MASK (1L<<17)
 
+# define KEY_RELEASE 3
+# define BUTTON_PRESS 4
+# define MOTION_NOTIFY 6
+# define DESTROY_NOTIFY 17
+
+//int		kill(t_mlx *mlx);
+//int		mouse_button(int button, int x, int y, t_mlx *mlx);
+//int		mouse_move(int x, int y, t_mlx *mlx);
+//int		keypress(t_key key_code, t_mlx *mlx);
+void	hook_to_mlx(t_mlx *mlx);
 
 #endif

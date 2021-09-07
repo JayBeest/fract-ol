@@ -1,17 +1,10 @@
 #include <stdio.h>
-#include <math.h>
 #include "../mlx/mlx.h"
 #include "main.h"
 #include "datatypes.h"
-#include "../libft/libft.h"
 #include "draw.h"
 #include "hooks.h"
 #include "parser.h"
-#include "actions.h"
-//void	init_scene(t_scene *scene)
-//{
-//
-//}
 
 void	init_default_scene(t_scene *scene)
 {
@@ -84,13 +77,7 @@ int	main(int argc, char **argv)
 	init_mlx(&mlx, &mlx.scene);
 	init_mlx_image(&mlx, &mlx.scene, &mlx.image);
 	draw_fractal_to_image(&mlx);
-	printf("\n %s\n", argv[0]);
-	mlx_hook(mlx.mlx_window, KeyRelease, KeyReleaseMask, keypress, &mlx);
-	mlx_hook(mlx.mlx_window, DestroyNotify, StructureNotifyMask, kill, &mlx);
-	mlx_hook(mlx.mlx_window, ButtonPress, ButtonPressMask, mouse_button, &mlx);
-	mlx_hook(mlx.mlx_window, MotionNotify, PointerMotionMask, mouse_move, &mlx);
-	mlx_loop_hook(mlx.mlx_ptr, draw_fractal_to_image, &mlx);
-//	mlx_loop_hook(mlx.mlx_ptr,redraw_window, &mlx);
+	hook_to_mlx(&mlx);
 	mlx_loop(mlx.mlx_ptr);
 	return (0);
 }

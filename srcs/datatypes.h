@@ -1,28 +1,26 @@
-#ifndef DATA_TYPES_H
-# define DATA_TYPES_H
+#ifndef DATATYPES_H
+# define DATATYPES_H
 
-
-typedef enum
+typedef enum e_bool
 {
 	FALSE,
 	TRUE
 }			t_bool;
 
-typedef enum
+typedef enum e_err_no
 {
 	NO_ERROR = 0,
-	NO_VALID_TYPE = 1,
-	TOO_MANY_ARGS = 2
+	NO_VALID_TYPE = 1
 }			t_err_no;
 
-typedef enum
+typedef enum e_fractol_type
 {
 	MANDELBROT,
 	JULIA,
 	SHIP
 }			t_fractol_type;
 
-typedef enum
+typedef enum e_setting
 {
 	EX1,
 	EX2,
@@ -30,16 +28,9 @@ typedef enum
 	DEFAULT = 0
 }			t_setting;
 
-typedef enum
-{
-	MACOS = 0,
-	LINUX = 1
-}			t_arch;
-
-typedef enum
+typedef enum e_key
 {
 	A = 0,
-	C = 8,
 	D = 2,
 	S = 1,
 	W = 13,
@@ -61,108 +52,98 @@ typedef enum
 	ESC = 53
 }			t_key;
 
-typedef struct
+typedef struct s_bool_err
 {
 	t_bool		bool;
 	t_err_no	error_nr;
 }			t_bool_err;
 
-typedef struct
+typedef struct s_rgb
 {
 	unsigned char	r;
 	unsigned char	g;
 	unsigned char	b;
 }			t_rgb;
 
-typedef struct
+typedef struct s_colours
 {
 	int	colour_mixer_1;
-	int colour_mixer_2;
-	int colour_mixer_3;
+	int	colour_mixer_2;
+	int	colour_mixer_3;
 }			t_colours;
 
-typedef struct
+typedef struct s_complex
 {
-	long double re;
-	long double im;
+	long double	re;
+	long double	im;
 }			t_complex;
 
-typedef struct
+typedef struct s_resolution
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 }			t_resolution;
 
-typedef struct
+typedef struct s_position
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 }			t_position;
 
-typedef struct
+typedef struct s_complex_position
 {
 	t_complex	c;
 	t_complex	z;
 }			t_complex_position;
 
-typedef struct
+typedef struct s_grid_position
 {
-	long double x;
-	long double y;
+	long double	x;
+	long double	y;
 }			t_grid_position;
 
-typedef struct
+typedef struct s_complex_plane
 {
 	t_complex	min;
 	t_complex	max;
 	long double	step;
 }			t_complex_plane;
 
-typedef struct
+typedef struct s_img_data
 {
 	void	*img_ptr;
 	char	*img_address;
-	int 	bits_per_pixel;
-	int 	line_length;
-	int 	endian;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
 }			t_img_data;
 
 typedef struct s_scene
 {
 	t_resolution			res;
 	t_fractol_type			current_fractal;
-	int 					iteration_amount;
+	int						iteration_amount;
 	t_bool					zoom_to_mouse;
 	t_complex_plane			plane;
 	t_grid_position			offset;
 	t_position				mouse;
 	t_complex_position		julia;
 	t_bool					julia_animation;
-	t_bool 					control_menu;
+	t_bool					control_menu;
 	t_bool					psycho;
 	t_colours				colours;
 	t_setting				setting;
-
 	t_complex_position		complex_position;
 	int						n;
 	long double				zoom;
-	int 					default_zoom;
+	int						default_zoom;
 }		t_scene;
 
-typedef void(*t_action_function)(t_scene*, t_key key, t_position position);
-
-typedef struct
-{
-	t_action_function	action[128];
-}		t_action_list;
-
-typedef struct
+typedef struct s_mlx
 {
 	void					*mlx_ptr;
 	void					*mlx_window;
-//	t_pixel					**pixels;
 	t_scene					scene;
-	t_action_list			action_list;
 	t_img_data				image;
 }		t_mlx;
 

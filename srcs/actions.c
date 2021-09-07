@@ -6,13 +6,13 @@
 void	key_action_controls(t_scene *scene, t_key key_code)
 {
 	if (key_code == LEFT)
-		scene->offset.x -= STEP;
+		scene->offset.x -= OFFSET_STEP;
 	else if (key_code == RIGHT)
-		scene->offset.x += STEP;
+		scene->offset.x += OFFSET_STEP;
 	else if (key_code == DOWN)
-		scene->offset.y += STEP;
+		scene->offset.y += OFFSET_STEP;
 	else if (key_code == UP)
-		scene->offset.y -= STEP;
+		scene->offset.y -= OFFSET_STEP;
 	else if (key_code == D && scene->current_fractal < SHIP)
 		scene->current_fractal++;
 	else if (key_code == A && scene->current_fractal > MANDELBROT)
@@ -47,4 +47,31 @@ void	key_action_colours(t_scene *scene, t_key key_code)
 		scene->colours.colour_mixer_3++;
 	else if (key_code == P)
 		switch_bool(&scene->psycho);
+}
+
+void	zoom_out(t_scene *scene, t_position mouse)
+{
+	if (scene->zoom_to_mouse)
+	{
+		scene->offset.x = scene->offset.x + mouse.x - (scene->res.x >> 1);
+		scene->offset.y = scene->offset.y + mouse.y - (scene->res.y >> 1);
+	}
+	scene->offset.x = scene->offset.x * ZOOM_FACTOR;
+	scene->offset.y = scene->offset.y * ZOOM_FACTOR;
+	scene->zoom = scene->zoom * ZOOM_FACTOR;
+}
+
+void	zoom_in(t_scene *scene, t_position mouse)
+{
+	if (scene->zoom_to_mouse)
+	{
+		scene->offset.x = scene->offset.x + mouse.x - (scene->res.x >> 1);
+		scene->offset.y = scene->offset.y + mouse.y - (scene->res.y >> 1);
+	}
+	if (scene->zoom > scene->default_zoom)
+	{
+		scene->offset.x = scene->offset.x / ZOOM_FACTOR;
+		scene->offset.y = scene->offset.y / ZOOM_FACTOR;
+		scene->zoom = scene->zoom / ZOOM_FACTOR;
+	}
 }

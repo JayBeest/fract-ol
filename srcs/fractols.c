@@ -1,5 +1,4 @@
 #include "datatypes.h"
-#include <math.h>
 
 int	mandelbrot(t_scene scene)
 {
