@@ -1,5 +1,13 @@
 NAME = fractol
-OBJ_C = main.c utils.c fractols.c menu.c hooks.c draw.c parser.c actions.c colour.c
+OBJ_C = main.c \
+		utils.c \
+		fractols.c \
+		menu.c \
+		hooks.c \
+		draw.c \
+		parser.c \
+		actions.c \
+		colour.c
 C_FLAGS = -g -Wall -Wextra -Werror
 SRCS_PATH = ./srcs/
 
@@ -10,7 +18,8 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	$(MAKE) -C ./libft
 	$(MAKE) -C ./mlx
-	$(CC) -o $@ $^ $(C_FLAGS) -Lmlx -Llibft -lmlx -lft -framework OpenGL -framework AppKit
+	$(CC) -o $@ $^ $(C_FLAGS) -Lmlx -Llibft -lmlx -lft \
+					-framework OpenGL -framework AppKit
 
 %.o: %.c
 	$(CC) -o $@ $< $(C_FLAGS) -Imlx -Ilibft -c
