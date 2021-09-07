@@ -3,7 +3,7 @@
 #include "datatypes.h"
 #define SAME 0
 
-t_bool_err	t_bool_true_no_err(void)
+t_bool_err static	t_bool_true_no_err(void)
 {
 	t_bool_err	true_bool_no_error;
 
@@ -12,32 +12,26 @@ t_bool_err	t_bool_true_no_err(void)
 	return (true_bool_no_error);
 }
 
-t_bool_err	t_bool_false_err(t_err_no error_no)
+t_bool_err static	t_bool_false_err(t_err_no error_no)
 {
 	t_bool_err	false_bool_error_no;
 
 	false_bool_error_no.bool = FALSE;
 	false_bool_error_no.error_nr = error_no;
-	if (error_no == NO_VALID_TYPE)
+	if (error_no == NO_VALID_TYPE || error_no == NO_ARGS)
 	{
-		printf("Usage: fractal [<fractal_type>] [<example>]\n");
-		printf("\nValid fractal types:  'Mandelbrot'");
-		printf("\n                      'Julia'");
-		printf("\n                      'Ship'\n");
-		printf("\nValid examples:       'Ex1'");
-		printf("\n                      'Ex2'");
-		printf("\n                      'Ex3'\n");
+		printf("Usage: fractal <fractal_type> [<example>]\n");
+		printf("\n    <fractal_type> :   Mandelbrot");
+		printf("\n                       Julia");
+		printf("\n                       Ship\n");
+		printf("\n    <example> :        Ex1");
+		printf("\n                       Ex2");
+		printf("\n                       Ex3\n");
 	}
 	return (false_bool_error_no);
 }
 
-t_bool_err	parse_no_args(void)
-{
-	printf("Usage: fractal [<fractal_type>] [<example>]\n");
-	return (t_bool_true_no_err());
-}
-
-t_bool_err	parse_flag(int argc, const char **argv, t_scene *scene)
+t_bool_err static	parse_flag(int argc, const char **argv, t_scene *scene)
 {
 	static const char	*examples[3] = {"Ex1", "Ex2", "Ex3"};
 	int					i;
@@ -59,7 +53,7 @@ t_bool_err	parse_arguments(int argc, const char **argv, t_scene *scene)
 	int					i;
 
 	if (argc == 1)
-		return (parse_no_args());
+		return (t_bool_false_err(NO_ARGS));
 	arg_len = ft_strlen(argv[1]);
 	i = 0;
 	while (i < 3)

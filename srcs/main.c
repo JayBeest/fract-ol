@@ -1,6 +1,7 @@
 #include <stdio.h>
-#include "mlx.h"
+#include "definitions.h"
 #include "datatypes.h"
+#include "mlx.h"
 #include "draw.h"
 #include "hooks.h"
 #include "parser.h"

@@ -1,3 +1,4 @@
+#include "definitions.h"
 #include "datatypes.h"
 #include "mlx.h"
 #include "colour.h"

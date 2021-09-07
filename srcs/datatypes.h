@@ -1,13 +1,5 @@
 #ifndef DATATYPES_H
 # define DATATYPES_H
-# define PROJECT "Fract'ol"
-# define RESOLUTION_X 800
-# define RESOLUTION_Y 600
-# define OFFSET_STEP 15
-# define ZOOM_FACTOR 1.5
-# define DEFAULT_ITERATIONS 50
-# define MANDEL_X_RATIO	4
-# define MANDEL_Y_RATIO	7
 
 typedef enum e_bool
 {
@@ -17,8 +9,9 @@ typedef enum e_bool
 
 typedef enum e_err_no
 {
-	NO_ERROR = 0,
-	NO_VALID_TYPE = 1
+	NO_ERROR,
+	NO_VALID_TYPE,
+	NO_ARGS
 }			t_err_no;
 
 typedef enum e_fractol_type

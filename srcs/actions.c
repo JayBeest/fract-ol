@@ -1,5 +1,5 @@
+#include "definitions.h"
 #include "datatypes.h"
-#include "main.h"
 #include "utils.h"
 
 void	key_action_controls(t_scene *scene, t_key key_code)
