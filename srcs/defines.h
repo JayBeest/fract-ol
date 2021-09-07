@@ -1,5 +1,5 @@
-#ifndef DEFINITIONS_H
-# define DEFINITIONS_H
+#ifndef DEFINES_H
+# define DEFINES_H
 
 # define PROJECT "Fract'ol"
 # define RESOLUTION_X 800
