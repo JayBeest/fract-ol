@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include "definitions.h"
-#include "datatypes.h"
 #include "mlx.h"
+#include "defines.h"
+#include "datatypes.h"
 #include "draw.h"
 #include "hooks.h"
 #include "parser.h"
@@ -42,17 +42,22 @@ void	init_mlx_image(t_mlx *mlx, t_scene *scene, t_img_data *image)
 
 void	setup_julia(t_scene *scene)
 {
-	if (scene->setting == 0)
+	if (scene->setting == DEFAULT)
+	{
+		scene->julia.c.re = 0;
+		scene->julia.c.im = 0;
+	}
+	else if (scene->setting == EX1)
 	{
 		scene->julia.c.re = -0.831660;
 		scene->julia.c.im = -0.206859;
 	}
-	else if (scene->setting == 1)
+	else if (scene->setting == EX2)
 	{
 		scene->julia.c.re = 0.025000;
 		scene->julia.c.im = 0.660000;
 	}
-	else if (scene->setting == 2)
+	else if (scene->setting == EX3)
 	{
 		scene->julia.c.re = 0.380000;
 		scene->julia.c.im = -0.120000;

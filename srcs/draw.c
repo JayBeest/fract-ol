@@ -1,10 +1,10 @@
-#include "definitions.h"
-#include "datatypes.h"
 #include "mlx.h"
-#include "colour.h"
-#include "fractols.h"
-#include "menu.h"
+#include "defines.h"
+#include "datatypes.h"
 #include "utils.h"
+#include "fractols.h"
+#include "colour.h"
+#include "menu.h"
 
 void static	put_pixel(t_mlx *mlx, t_position position, unsigned int colour)
 {
@@ -43,7 +43,7 @@ unsigned int static	calculate_fractal(t_scene *scene, t_position pos)
 
 	scene->complex_position = pos_to_complex_pos(scene->plane, pos);
 	n = fun_ptr[scene->current_fractal](*scene);
-	return (fetch_colour3(n, scene->colours, scene->iteration_amount));
+	return (fetch_colour(n, scene->colours, scene->iteration_amount));
 }
 
 int	draw_fractal_to_image(t_mlx *mlx)

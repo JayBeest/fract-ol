@@ -26,7 +26,7 @@ typedef enum e_setting
 	EX1,
 	EX2,
 	EX3,
-	DEFAULT = 0
+	DEFAULT
 }			t_setting;
 
 # ifdef __linux__
