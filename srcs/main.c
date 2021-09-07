@@ -69,10 +69,7 @@ int	main(int argc, char **argv)
 	if (parse_success.bool)
 		printf("\nParse SUCCESS!!\n");
 	else
-	{
-		printf("error no: %d\n", parse_success.error_nr);
 		return (1);
-	}
 	setup_julia(&mlx.scene);
 	init_mlx(&mlx, &mlx.scene);
 	init_mlx_image(&mlx, &mlx.scene, &mlx.image);

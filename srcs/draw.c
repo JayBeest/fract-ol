@@ -6,7 +6,7 @@
 #include "menu.h"
 #include "utils.h"
 
-void	put_pixel(t_mlx *mlx, t_position position, unsigned int colour)
+void static	put_pixel(t_mlx *mlx, t_position position, unsigned int colour)
 {
 	char	*pixel_address;
 	int		offset;
@@ -19,17 +19,20 @@ void	put_pixel(t_mlx *mlx, t_position position, unsigned int colour)
 	*(unsigned int *)pixel_address = colour;
 }
 
-void	redraw_window(t_mlx *mlx)
+void static	redraw_window(t_mlx *mlx)
 {
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, \
 		mlx->image.img_ptr, 0, 0);
 	mlx->scene.complex_position = pos_to_complex_pos(mlx->scene.plane, \
 		mlx->scene.mouse);
 	if (mlx->scene.control_menu)
-		control_menu(mlx);
+	{
+		control_menu(*mlx);
+		info_menu(*mlx);
+	}
 }
 
-unsigned int	calculate_fractal(t_scene *scene, t_position pos)
+unsigned int static	calculate_fractal(t_scene *scene, t_position pos)
 {
 	int						n;
 	const t_fractal_f_ptr	fun_ptr[3] = {

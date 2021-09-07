@@ -1,7 +1,6 @@
 #include "../libft/libft.h"
 #include "datatypes.h"
 #include <stdio.h>
-
 #define SAME 0
 
 t_bool_err	t_bool_true_no_err(void)
@@ -19,13 +18,22 @@ t_bool_err	t_bool_false_err(t_err_no error_no)
 
 	false_bool_error_no.bool = FALSE;
 	false_bool_error_no.error_nr = error_no;
+	if (error_no == NO_VALID_TYPE)
+	{
+		printf("Usage: fractal [<fractal_type>] [<example>]\n");
+		printf("\nValid fractal types:  'Mandelbrot'");
+		printf("\n                      'Julia'");
+		printf("\n                      'Ship'\n");
+		printf("\nValid examples:       'Ex1'");
+		printf("\n                      'Ex2'");
+		printf("\n                      'Ex3'\n");
+	}
 	return (false_bool_error_no);
 }
 
 t_bool_err	parse_no_args(void)
 {
 	printf("Usage: fractal [<fractal_type>] [<example>]\n");
-	printf("");
 	return (t_bool_true_no_err());
 }
 
@@ -38,10 +46,7 @@ t_bool_err	parse_flag(int argc, const char **argv, t_scene *scene)
 	while (i < 3 && argc == 3)
 	{
 		if (ft_strlen(*argv) == 3 && ft_strncmp(examples[i], *argv, 3) == SAME)
-		{
 			scene->setting = i;
-			printf("example: %s\n", examples[i]);
-		}
 		i++;
 	}
 	return (t_bool_true_no_err());
