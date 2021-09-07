@@ -9,15 +9,18 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(MAKE) -C ./libft
+	$(MAKE) -C ./mlx
 	$(CC) -o $@ $^ $(C_FLAGS) -Lmlx -Llibft -lmlx -lft -framework OpenGL -framework AppKit
 
-%.o:%.c
+%.o: %.c
 	$(CC) -o $@ $< $(C_FLAGS) -Imlx -Ilibft -c
 
 clean:
 	rm -f $(OBJ)
 
 fclean: clean
+	$(MAKE) fclean -C ./libft
+	$(MAKE) clean -C ./mlx
 	rm -f $(NAME)
 
 re: fclean all

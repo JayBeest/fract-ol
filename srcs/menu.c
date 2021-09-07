@@ -2,7 +2,7 @@
 #include "datatypes.h"
 #include "../libft/libft.h"
 
-void	control_menu(t_mlx mlx)
+void	controls_menu(t_mlx mlx)
 {
 	int	x_pos;
 

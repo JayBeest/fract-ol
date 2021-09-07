@@ -1,6 +1,5 @@
 #include "datatypes.h"
-#include "../mlx/mlx.h"
-#include "main.h"
+#include "mlx.h"
 #include "colour.h"
 #include "fractols.h"
 #include "menu.h"
@@ -27,7 +26,7 @@ void static	redraw_window(t_mlx *mlx)
 		mlx->scene.mouse);
 	if (mlx->scene.control_menu)
 	{
-		control_menu(*mlx);
+		controls_menu(*mlx);
 		info_menu(*mlx);
 	}
 }

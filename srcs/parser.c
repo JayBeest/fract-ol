@@ -1,6 +1,6 @@
-#include "../libft/libft.h"
-#include "datatypes.h"
 #include <stdio.h>
+#include "libft.h"
+#include "datatypes.h"
 #define SAME 0
 
 t_bool_err	t_bool_true_no_err(void)

@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "../mlx/mlx.h"
+#include "mlx.h"
 #include "datatypes.h"
 #include "hooks.h"
 #include "draw.h"
