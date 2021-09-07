@@ -154,14 +154,17 @@ typedef struct s_img_data
 
 typedef struct s_scene
 {
+	int						n;
+	int						iteration_amount;
+	int						default_zoom;
+	long double				zoom;
 	t_resolution			res;
 	t_fractol_type			current_fractal;
-	int						iteration_amount;
-	t_bool					zoom_to_mouse;
 	t_complex_plane			plane;
+	t_complex_position		julia;
 	t_grid_position			offset;
 	t_position				mouse;
-	t_complex_position		julia;
+	t_bool					zoom_to_mouse;
 	t_bool					julia_animation;
 	t_bool					controls_menu;
 	t_bool					info_menu;
@@ -169,9 +172,6 @@ typedef struct s_scene
 	t_colours				colours;
 	t_setting				setting;
 	t_complex_position		complex_position;
-	int						n;
-	long double				zoom;
-	int						default_zoom;
 }		t_scene;
 
 typedef struct s_mlx
