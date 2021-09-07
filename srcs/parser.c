@@ -23,7 +23,7 @@ t_bool_err static	t_bool_false_err(t_err_no error_no)
 		printf("Usage: fractal <fractal_type> [<example>]\n");
 		printf("\n    <fractal_type> :   Mandelbrot");
 		printf("\n                       Julia");
-		printf("\n                       Ship\n");
+		printf("\n                       BurningShip\n");
 		printf("\n    <example> :        Ex1");
 		printf("\n                       Ex2");
 		printf("\n                       Ex3\n");
@@ -36,6 +36,8 @@ t_bool_err static	parse_flag(int argc, const char **argv, t_scene *scene)
 	static const char	*examples[3] = {"Ex1", "Ex2", "Ex3"};
 	int					i;
 
+	if (argc == 2)
+		return (t_bool_true_no_err());
 	i = 0;
 	while (i < 3 && argc == 3)
 	{
@@ -43,12 +45,21 @@ t_bool_err static	parse_flag(int argc, const char **argv, t_scene *scene)
 			scene->setting = i;
 		i++;
 	}
+	if (ft_strlen(argv[0]) < 10 && ft_strisfloat(argv[0]))
+	{
+		scene->julia.c.re = ft_atof(argv[0]);
+		scene->setting = CUSTOM;
+	}
+	if (argc > 3 && ft_strlen(argv[1]) < 10 && ft_strisfloat(argv[1]))
+		scene->julia.c.im = ft_atof(argv[1]);
 	return (t_bool_true_no_err());
 }
 
 t_bool_err	parse_arguments(int argc, const char **argv, t_scene *scene)
 {
-	static const char	*fractal_type[3] = {"Mandelbrot", "Julia", "Ship"};
+	static const char	*fractal_type[3] = {"Mandelbrot", \
+											"Julia", \
+											"BurningShip"};
 	unsigned int		arg_len;
 	int					i;
 

@@ -33,7 +33,9 @@ void	key_action_settings(t_scene *scene, t_key key_code)
 	else if (key_code == Z)
 		scene->julia = pos_to_complex_pos(scene->plane, scene->mouse);
 	else if (key_code == F1)
-		switch_bool(&scene->control_menu);
+		switch_bool(&scene->controls_menu);
+	else if (key_code == F2)
+		switch_bool(&scene->info_menu);
 }
 
 void	key_action_colours(t_scene *scene, t_key key_code)

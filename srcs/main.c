@@ -10,7 +10,6 @@ void	init_default_scene(t_scene *scene)
 {
 	scene->res.x = RESOLUTION_X;
 	scene->res.y = RESOLUTION_Y;
-	scene->current_fractal = MANDELBROT;
 	scene->setting = DEFAULT;
 	scene->iteration_amount = DEFAULT_ITERATIONS;
 	scene->colours.colour_mixer_1 = 1;
@@ -23,7 +22,8 @@ void	init_default_scene(t_scene *scene)
 	scene->zoom = scene->default_zoom;
 	scene->mouse.x = -1;
 	scene->mouse.y = -1;
-	scene->control_menu = TRUE;
+	scene->controls_menu = TRUE;
+	scene->info_menu = TRUE;
 }
 
 void	init_mlx(t_mlx *mlx, const t_scene *scene)

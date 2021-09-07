@@ -26,7 +26,8 @@ typedef enum e_setting
 	EX1,
 	EX2,
 	EX3,
-	DEFAULT
+	DEFAULT,
+	CUSTOM
 }			t_setting;
 
 # ifdef __linux__
@@ -45,6 +46,7 @@ typedef enum e_key
 	L = 108,
 	Z = 122,
 	F1 = 65470,
+	F2 = 65471,
 	PLUS = 61,
 	MIN = 45,
 	DOWN = 65364,
@@ -71,6 +73,7 @@ typedef enum e_key
 	L = 37,
 	Z = 6,
 	F1 = 122,
+	F2 = 120,
 	PLUS = 24,
 	MIN = 27,
 	DOWN = 125,
@@ -160,7 +163,8 @@ typedef struct s_scene
 	t_position				mouse;
 	t_complex_position		julia;
 	t_bool					julia_animation;
-	t_bool					control_menu;
+	t_bool					controls_menu;
+	t_bool					info_menu;
 	t_bool					psycho;
 	t_colours				colours;
 	t_setting				setting;

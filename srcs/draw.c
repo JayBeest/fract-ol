@@ -25,11 +25,10 @@ void static	redraw_window(t_mlx *mlx)
 		mlx->image.img_ptr, 0, 0);
 	mlx->scene.complex_position = pos_to_complex_pos(mlx->scene.plane, \
 		mlx->scene.mouse);
-	if (mlx->scene.control_menu)
-	{
+	if (mlx->scene.controls_menu)
 		controls_menu(*mlx);
+	if (mlx->scene.info_menu)
 		info_menu(*mlx);
-	}
 }
 
 unsigned int static	calculate_fractal(t_scene *scene, t_position pos)

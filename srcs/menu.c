@@ -33,7 +33,9 @@ void	controls_menu(t_mlx mlx)
 
 void	info_menu(t_mlx mlx)
 {
-	static const char	*fractal_type[3] = {"Mandelbrot", "Julia", "Ship"};
+	static const char	*fractal_type[3] = {"Mandelbrot", \
+											"Julia", \
+											"BurningShip"};
 	t_position			pos;
 	const char			*print;
 

@@ -59,7 +59,8 @@ int	keypress(t_key key_code, t_mlx *mlx)
 		key_code == DOWN || key_code == A || key_code == D)
 		key_action_controls(&mlx->scene, key_code);
 	else if (key_code == PLUS || key_code == MIN || key_code == B_SPACE || \
-		key_code == M || key_code == N || key_code == Z || key_code == F1)
+		key_code == M || key_code == N || key_code == Z || key_code == F1 || \
+		key_code == F2)
 		key_action_settings(&mlx->scene, key_code);
 	else if (key_code == J || key_code == K || key_code == L || \
 		key_code == W || key_code == S || key_code == P)
