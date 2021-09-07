@@ -36,6 +36,34 @@ typedef enum e_setting
 	DEFAULT = 0
 }			t_setting;
 
+# ifdef __linux__
+
+typedef enum e_key
+{
+	A = 97,
+	D = 100,
+	S = 115,
+	W = 119,
+	M = 109,
+	N = 110,
+	P = 112,
+	J = 106,
+	K = 107,
+	L = 108,
+	Z = 122,
+	F1 = 65470,
+	PLUS = 61,
+	MIN = 45,
+	DOWN = 65364,
+	UP = 65362,
+	LEFT = 65361,
+	RIGHT = 65363,
+	B_SPACE = 65288,
+	ESC = 65307
+}			t_key;
+
+# else
+
 typedef enum e_key
 {
 	A = 0,
@@ -59,6 +87,8 @@ typedef enum e_key
 	B_SPACE = 51,
 	ESC = 53
 }			t_key;
+
+# endif
 
 typedef struct s_bool_err
 {
