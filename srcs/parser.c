@@ -21,13 +21,13 @@ t_bool_err static	t_bool_false_err(t_err_no error_no)
 	if (error_no == NO_VALID_TYPE || error_no == NO_ARGS)
 	{
 		printf("Usage: fractal <fractal_type> [<example>] [<complex_pos>]\n");
-		printf("\n    <fractal_type> :   Mandelbrot");
-		printf("\n                       Julia");
-		printf("\n                       BurningShip\n");
-		printf("\n    <example> :        Ex1");
-		printf("\n                       Ex2");
-		printf("\n                       Ex3\n");
-		printf("\n    <complex_pos>      Real and imaginary component sepera");
+		printf("\n    <fractal_type> :   'Mandelbrot'");
+		printf("\n                       'Julia'");
+		printf("\n                       'BurningShip'\n");
+		printf("\n    <example> :        'Ex1'");
+		printf("\n                       'Ex2'");
+		printf("\n                       'Ex3'\n");
+		printf("\n    <complex_pos> :    Real and imaginary component sepera");
 		printf("ted by a space.");
 		printf("\n                       Both roughly between -2 and +2.");
 		printf("\n                       These will be used as 'C' values ");
