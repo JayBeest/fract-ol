@@ -20,13 +20,18 @@ t_bool_err static	t_bool_false_err(t_err_no error_no)
 	false_bool_error_no.error_nr = error_no;
 	if (error_no == NO_VALID_TYPE || error_no == NO_ARGS)
 	{
-		printf("Usage: fractal <fractal_type> [<example>]\n");
+		printf("Usage: fractal <fractal_type> [<example>] [<complex_pos>]\n");
 		printf("\n    <fractal_type> :   Mandelbrot");
 		printf("\n                       Julia");
 		printf("\n                       BurningShip\n");
 		printf("\n    <example> :        Ex1");
 		printf("\n                       Ex2");
 		printf("\n                       Ex3\n");
+		printf("\n    <complex_pos>      Real and imaginary component sepera");
+		printf("ted by a space.");
+		printf("\n                       Both roughly between -2 and +2.");
+		printf("\n                       These will be used as 'C' values ");
+		printf("calculating the Julia fractal\n");
 	}
 	return (false_bool_error_no);
 }
@@ -45,12 +50,12 @@ t_bool_err static	parse_flag(int argc, const char **argv, t_scene *scene)
 			scene->setting = i;
 		i++;
 	}
-	if (ft_strlen(argv[0]) < 10 && ft_strisfloat(argv[0]))
+	if (ft_strlen(argv[0]) < 15 && ft_strisfloat(argv[0]))
 	{
 		scene->julia.c.re = ft_atof(argv[0]);
 		scene->setting = CUSTOM;
 	}
-	if (argc > 3 && ft_strlen(argv[1]) < 10 && ft_strisfloat(argv[1]))
+	if (argc > 3 && ft_strlen(argv[1]) < 15 && ft_strisfloat(argv[1]))
 		scene->julia.c.im = ft_atof(argv[1]);
 	return (t_bool_true_no_err());
 }
