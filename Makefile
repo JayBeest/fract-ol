@@ -1,13 +1,13 @@
 NAME = fractol
 OBJ_C = main.c \
+		parser.c \
+		draw.c \
 		utils.c \
 		fractols.c \
-		menu.c \
+		colour.c \
 		hooks.c \
-		draw.c \
-		parser.c \
 		actions.c \
-		colour.c
+		menu.c
 C_FLAGS = -g -Wall -Wextra -Werror
 SRCS_PATH = ./srcs/
 
