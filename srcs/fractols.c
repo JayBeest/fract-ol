@@ -51,7 +51,7 @@ int	burning_ship(t_scene scene)
 	int			iterations;
 	t_complex	c;
 	t_complex	z;
-	t_complex 	squared;
+	t_complex	squared;
 
 	c = scene.complex_position.c;
 	z = scene.complex_position.z;

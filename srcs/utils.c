@@ -37,10 +37,10 @@ t_complex_plane	calculate_complex_plane(t_scene scene)
 {
 	t_complex_plane	plane;
 
-	plane.min.re = (scene.offset.x - RESOLUTION_X / 2) / scene.zoom;
+	plane.min.re = (scene.offset.x - (RESOLUTION_X >> 1)) / scene.zoom;
 	plane.max.re = plane.min.re + RESOLUTION_X / scene.zoom;
 	plane.step = (plane.max.re - plane.min.re) / RESOLUTION_X;
-	plane.min.im = -(scene.offset.y - RESOLUTION_Y / 2) / scene.zoom;
+	plane.min.im = -(scene.offset.y - (RESOLUTION_Y >> 1)) / scene.zoom;
 	plane.max.im = plane.min.im - RESOLUTION_Y / scene.zoom;
 	return (plane);
 }
