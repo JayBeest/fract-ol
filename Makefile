@@ -32,4 +32,4 @@ fclean: clean
 	$(MAKE) clean -C ./mlx
 	rm -f $(NAME)
 
-re: fclean all
+re: clean all
