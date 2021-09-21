@@ -20,7 +20,8 @@ t_bool_err static	t_bool_false_err(t_err_no error_no)
 	false_bool_error_no.error_nr = error_no;
 	if (error_no == NO_VALID_TYPE || error_no == NO_ARGS)
 	{
-		printf("Usage: fractal <fractal_type> [<example>] [<complex_pos>]\n");
+		printf("Usage: fractal <fractal_type> [<example>] || ");
+		printf("[<complex_pos>]\n");
 		printf("\n    <fractal_type> :   'Mandelbrot'");
 		printf("\n                       'Julia'");
 		printf("\n                       'BurningShip'\n");
