@@ -14,7 +14,7 @@ void	init_default_scene(t_scene *scene)
 	scene->iteration_amount = DEFAULT_ITERATIONS;
 	scene->colours.colour_mixer_1 = 8;
 	scene->colours.colour_mixer_2 = 1;
-	scene->colours.colour_mixer_3 = 1;
+	scene->colours.colour_mixer_3 = 4;
 	if (scene->res.x * MANDEL_X_RATIO > scene->res.y * MANDEL_Y_RATIO)
 		scene->default_zoom = scene->res.y / 3;
 	else
