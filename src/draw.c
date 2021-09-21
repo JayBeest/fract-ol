@@ -6,8 +6,6 @@
 #include <colour.h>
 #include <menu.h>
 
-#include <stdio.h>
-
 void static	put_pixel(t_mlx *mlx, t_position position, unsigned int colour)
 {
 	char	*pixel_address;
