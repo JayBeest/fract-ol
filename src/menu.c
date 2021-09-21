@@ -1,6 +1,6 @@
-#include "mlx.h"
-#include "libft.h"
-#include "datatypes.h"
+#include <mlx.h>
+#include <libft.h>
+#include <datatypes.h>
 
 void	controls_menu(t_mlx mlx)
 {

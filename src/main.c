@@ -1,10 +1,10 @@
 #include <stdio.h>
-#include "mlx.h"
-#include "defines.h"
-#include "datatypes.h"
-#include "draw.h"
-#include "hooks.h"
-#include "parser.h"
+#include <mlx.h>
+#include <defines.h>
+#include <datatypes.h>
+#include <draw.h>
+#include <hooks.h>
+#include <parser.h>
 
 void	init_default_scene(t_scene *scene)
 {

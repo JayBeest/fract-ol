@@ -1,10 +1,10 @@
 #include <stdlib.h>
-#include "mlx.h"
-#include "datatypes.h"
-#include "utils.h"
-#include "draw.h"
-#include "hooks.h"
-#include "actions.h"
+#include <mlx.h>
+#include <datatypes.h>
+#include <utils.h>
+#include <draw.h>
+#include <hooks.h>
+#include <actions.h>
 
 int	kill(t_mlx *mlx)
 {

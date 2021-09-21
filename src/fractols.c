@@ -1,4 +1,4 @@
-#include "datatypes.h"
+#include <datatypes.h>
 
 int	mandelbrot(t_scene scene)
 {
@@ -54,6 +54,8 @@ int	burning_ship(t_scene scene)
 	t_complex	squared;
 
 	c = scene.complex_position.c;
+	c.im = -1 * c.im;
+	z.im = -1 * z.im;
 	z = scene.complex_position.z;
 	squared.re = 0;
 	squared.im = 0;

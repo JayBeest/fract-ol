@@ -1,4 +1,4 @@
-#include "datatypes.h"
+#include <datatypes.h>
 
 unsigned int	rgb_to_hex(unsigned char r, unsigned char g, unsigned char b)
 {

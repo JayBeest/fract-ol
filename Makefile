@@ -1,35 +1,39 @@
-NAME = fractol
-OBJ_C = main.c \
-		parser.c \
-		draw.c \
-		utils.c \
-		fractols.c \
-		colour.c \
-		hooks.c \
-		actions.c \
-		menu.c
-C_FLAGS = -g -Wall -Wextra -Werror
-SRCS_PATH = ./srcs/
-
-OBJ = $(OBJ_C:%.c=$(SRCS_PATH)%.o)
+NAME = 		fractol
+SRC = 		main.c \
+			parser.c \
+			draw.c \
+			utils.c \
+			fractols.c \
+			colour.c \
+			hooks.c \
+			actions.c \
+			menu.c
+SRC_DIR =	src
+OBJ_DIR	= 	$(SRC_DIR)/obj
+INCL = 		-I$(SRC_DIR)/incl
+C_FLAGS = 	-g -Wall -Wextra -Werror -fsanitize=address
+OBJ = 		$(SRC:%.c=$(OBJ_DIR)/%.o)
 
 all: $(NAME)
 
+bonus: all
+
 $(NAME): $(OBJ)
-	$(MAKE) -C ./libft
-	$(MAKE) -C ./mlx
-	$(CC) -o $@ $^ $(C_FLAGS) -Lmlx -Llibft -lmlx -lft \
+	$(MAKE) -C libft
+	$(MAKE) -C mlx
+	$(CC) -o $@ $^ $(C_FLAGS) $(INCL) -Lmlx -Llibft -lmlx -lft \
 					-framework OpenGL -framework AppKit
 
-%.o: %.c
-	$(CC) -o $@ $< $(C_FLAGS) -Imlx -Ilibft -c
+$(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
+	@mkdir -p $(@D)
+	$(CC) $< $(C_FLAGS) $(INCL) -Imlx -Ilibft -c -o $@
 
 clean:
-	rm -f $(OBJ)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
-	$(MAKE) fclean -C ./libft
-	$(MAKE) clean -C ./mlx
+	$(MAKE) fclean -C libft
+	$(MAKE) clean -C mlx
 	rm -f $(NAME)
 
 re: clean all

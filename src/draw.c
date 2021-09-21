@@ -1,18 +1,18 @@
-#include "mlx.h"
-#include "defines.h"
-#include "datatypes.h"
-#include "utils.h"
-#include "fractols.h"
-#include "colour.h"
-#include "menu.h"
+#include <mlx.h>
+#include <defines.h>
+#include <datatypes.h>
+#include <utils.h>
+#include <fractols.h>
+#include <colour.h>
+#include <menu.h>
+
+#include <stdio.h>
 
 void static	put_pixel(t_mlx *mlx, t_position position, unsigned int colour)
 {
 	char	*pixel_address;
 	int		offset;
 
-	if (mlx->scene.current_fractal == SHIP)
-		position.y = RESOLUTION_Y - position.y;
 	offset = position.y * mlx->image.line_length + position.x * \
 		(mlx->image.bits_per_pixel / 8);
 	pixel_address = mlx->image.img_address + offset;
