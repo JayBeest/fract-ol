@@ -11,6 +11,8 @@
 # define MOTION_NOTIFY 6
 # define DESTROY_NOTIFY 17
 
+# include <datatypes.h>
+
 void	hook_to_mlx(t_mlx *mlx);
 
 #endif

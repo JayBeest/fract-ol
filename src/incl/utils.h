@@ -1,6 +1,8 @@
 #ifndef UTILS_H
 # define UTILS_H
 
+# include <datatypes.h>
+
 void				return_to_origin(t_scene *scene);
 void				center_on_mouse(t_position mouse, t_scene *scene);
 void				switch_bool(t_bool *bool);

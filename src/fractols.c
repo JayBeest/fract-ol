@@ -1,4 +1,4 @@
-#include <datatypes.h>
+#include <fractols.h>
 
 int	mandelbrot(t_scene scene)
 {

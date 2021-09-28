@@ -1,5 +1,5 @@
 #include <defines.h>
-#include <datatypes.h>
+#include <utils.h>
 
 void	switch_bool(t_bool *bool)
 {

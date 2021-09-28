@@ -1,6 +1,5 @@
 #include <mlx.h>
-#include <defines.h>
-#include <datatypes.h>
+#include <draw.h>
 #include <utils.h>
 #include <fractols.h>
 #include <colour.h>
