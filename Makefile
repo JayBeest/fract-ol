@@ -21,7 +21,7 @@ bonus: all
 $(NAME): $(OBJ)
 	$(MAKE) -C libft
 	$(MAKE) -C mlx
-	$(CC) -o $@ $^ $(C_FLAGS) $(INCL) -Lmlx -Llibft -lmlx -lft \
+	$(CC) -o $@ $^ -Lmlx -Llibft -lmlx -lft \
 					-framework OpenGL -framework AppKit
 
 $(OBJ_DIR)/%.o:$(SRC_DIR)/%.c

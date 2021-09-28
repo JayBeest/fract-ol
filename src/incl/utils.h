@@ -1,5 +1,6 @@
 #ifndef UTILS_H
 # define UTILS_H
+# include <datatypes.h>
 
 # include <datatypes.h>
 

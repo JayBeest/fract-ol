@@ -1,5 +1,6 @@
 #ifndef COLOUR_H
 # define COLOUR_H
+# include <datatypes.h>
 
 # include <datatypes.h>
 

@@ -1,5 +1,6 @@
 #ifndef HOOKS_H
 # define HOOKS_H
+# include <datatypes.h>
 
 # define KEY_RELEASE_MASK 1
 # define BUTTON_PRESS_MASK 2

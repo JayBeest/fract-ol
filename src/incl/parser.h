@@ -1,5 +1,6 @@
 #ifndef PARSER_H
 # define PARSER_H
+# include <datatypes.h>
 
 # include <datatypes.h>
 
