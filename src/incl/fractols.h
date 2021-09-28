@@ -1,6 +1,5 @@
 #ifndef FRACTOLS_H
 # define FRACTOLS_H
-# include <datatypes.h>
 
 # include <datatypes.h>
 

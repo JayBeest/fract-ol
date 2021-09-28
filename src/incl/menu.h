@@ -1,6 +1,5 @@
 #ifndef MENU_H
 # define MENU_H
-# include <datatypes.h>
 
 # include <datatypes.h>
 
