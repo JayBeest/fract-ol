@@ -8,7 +8,7 @@
 int	kill(t_mlx *mlx)
 {
 	mlx_destroy_window(mlx->mlx_ptr, mlx->mlx_window);
-	exit (1);
+	exit (0);
 }
 
 int	mouse_button(int button, int x, int y, t_mlx *mlx)
